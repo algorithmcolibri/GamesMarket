@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -167,6 +170,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BusinessLogic\BusinessLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -174,9 +178,28 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BLModel\CompConfig.cs" />
+    <Compile Include="Models\BLModel\ConfigCatalog.cs" />
+    <Compile Include="Models\BLModel\Cpu.cs" />
+    <Compile Include="Models\BLModel\GameCatalog.cs" />
+    <Compile Include="Models\BLModel\OS.cs" />
+    <Compile Include="Models\BLModel\Ram.cs" />
+    <Compile Include="Models\BLModel\TypeGame.cs" />
+    <Compile Include="Models\BLModel\VideoCard.cs" />
+    <Compile Include="Models\BLModel\Wallet.cs" />
+    <Compile Include="Models\DBModel\CompConfig.cs" />
+    <Compile Include="Models\DBModel\ConfigCatalog.cs" />
+    <Compile Include="Models\DBModel\Cpu.cs" />
+    <Compile Include="Models\DBModel\GameCatalog.cs" />
+    <Compile Include="Models\DBModel\OS.cs" />
+    <Compile Include="Models\DBModel\Ram.cs" />
+    <Compile Include="Models\DBModel\TypeGame.cs" />
+    <Compile Include="Models\DBModel\VideoCard.cs" />
+    <Compile Include="Models\DBModel\Wallet.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\DBLogic.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
