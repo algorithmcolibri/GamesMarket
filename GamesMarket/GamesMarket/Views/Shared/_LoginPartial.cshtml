@@ -1,22 +1,61 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        <li id="dropdown-width">
+            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            <ul class="ulWidth">
+                <li>
+                    <a class="tx-left" href="~/UserProfile/Settings">My Wallets</a>
+                </li>
+                <li>
+                    <a class="tx-left" href="~/UserProfile/Index">My Profile</a>
+                </li>
+                <li>
+                    <a class="tx-left" href="~/UserProfile/Settings">Settings</a>
+                </li>
+                <li>
+                    <a class="tx-left" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
+                </li>
+            </ul>
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        <script>
+            $(function () {
+                var width = document.getElementById('dropdown-width').offsetWidth;
+
+                if (width - 15 < 140) {
+                    $('.ulWidth').each(function () {
+                        $(this).css('width', 166);
+                        $(this).css('padding', ' 8px 5px 8px 5px');
+                        $(this).css('background', 'black');
+                        $(this).css('margin-left', '-15px');
+                    });
+                }
+                else {
+                    $('.ulWidth').each(function () {
+                        $(this).css('width', width + 26);
+                        $(this).css('padding', ' 8px 5px 8px 5px');
+                        $(this).css('background', 'black');
+                        $(this).css('margin-left', '-15px');
+                    });
+                }
+                $('.menu2').each(function () {
+                    $(this).css('display', 'contents');
+                });
+                $('.tx-left').each(function () {
+                    $(this).css('text-align', 'left');
+                    $(this).css('margin-left', '0px');
+                    $(this).css('padding-right', '20px');
+                });
+            });
+        </script>
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 }
