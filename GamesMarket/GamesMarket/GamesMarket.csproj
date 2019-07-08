@@ -212,10 +212,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\02.jpg" />
     <Content Include="img\logo.png" />
     <Content Include="img\logo1.png" />
     <Content Include="img\nav.png" />
+    <Content Include="img\picturemessage_erjopyj5.pzb.png" />
     <Content Include="img\search.png" />
+    <Content Include="img\test1.png" />
     <Content Include="img\testMusor\1.jpg" />
     <Content Include="img\testMusor\11.jpg" />
     <Content Include="img\testMusor\2.jpg" />

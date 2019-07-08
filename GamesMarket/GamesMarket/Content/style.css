@@ -127,17 +127,19 @@ ul.navig li a:hover{
 	vertical-align: -webkit-baseline-middle;
 }
 .banner {
-    background: url(../img/testMusor/banner.jpg)no-repeat;
+    /*background: url(../img/testMusor/banner.jpg)no-repeat;*/
+    background: url(../img/picturemessage_erjopyj5.pzb.png)no-repeat;
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
     -moz-background-size: cover;
     -ms-background-size: cover;
-    min-height: 650px;
+    min-height: 800px;
 }
+
 @media(max-width:1440px){
 	.banner{
-		min-height:600px;	
+		min-height:500px;	
 	}
 }
 .banner-bot{
@@ -1239,7 +1241,7 @@ ul.tags_links li a:hover{
 		margin-top: 0px;
 	}
 	.banner {
-		min-height: 369px;
+		min-height: 269px;
 	}
 	.news-grid-left h4 {
 		font-size: 8em;
@@ -1312,7 +1314,7 @@ ul.tags_links li a:hover{
     }
 
     .banner {
-        min-height: 341px;
+        min-height: 241px;
     }
 
     .banner-bot h2 {
@@ -1445,7 +1447,7 @@ ul.tags_links li a:hover{
 		width: 55%;
 	}
 	.banner {
-		min-height: 224px;
+		min-height: 124px;
 	}
 	.banner-bot h2 {
 		font-size: 2em;
@@ -1579,7 +1581,7 @@ ul.tags_links li a:hover{
 		width: 89%;
 	}
 	.banner {
-		min-height: 160px;
+		min-height: 60px;
 	}
 	.banner-bot h2 {
 		font-size: 1.5em;
@@ -1628,3 +1630,41 @@ ul.tags_links li a:hover{
 }
 
 /*-- Media Queries Ends Here --*/
+
+/* start login style */
+.row-login{
+    color: #f3f3f3;
+    background: url(../img/test1.png)no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    padding: 15.25em 0;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+}
+.login{
+    width: 400px;
+    text-align: center;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+.input-login {
+    width: 90%;
+    margin-left: 20px;
+    background-color: #ccd6d9;
+}
+.a-white {
+    color: white;
+    margin-left: 13%;
+}
+.a-white:focus{
+    color: #7803ed;
+    text-decoration: underline;
+}
+.a-white:hover {
+    color: #7803ed;
+    text-decoration: underline;
+}
+/* end login style */
