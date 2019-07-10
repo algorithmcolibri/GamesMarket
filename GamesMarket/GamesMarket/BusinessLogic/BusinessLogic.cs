@@ -10,21 +10,20 @@ namespace GamesMarket.BusinessLogic
 {
     public class BusinessLogic
     {
-        #region Fields
+		#region Fields
 
-        static string connectionString = @"Data Source = ; Initial Catalog = ; Integrated Security = False; Persist Security Info=False; User ID = ; Password= ";// todo Add DB Config
+		public static string connectionString = @"Data Source = 128.0.175.59; Initial Catalog = GameDev_Company; Integrated Security = False; Persist Security Info=False;User ID = GameDev; Password=GameDev123456";
 
+		#endregion
 
-        #endregion
+		#region Methods
 
-        #region Methods
+		#region Insert
 
-        #region Insert
+		#endregion
 
-        #endregion
-
-        #region Select
-        public static IList<Models.BLModel.CompConfig> SelectCompConfig(string idUser = null)
+		#region Select
+		public static IList<Models.BLModel.CompConfig> SelectCompConfig(string idUser = null)
         {
             var model = new DBLogic(connectionString);
 
