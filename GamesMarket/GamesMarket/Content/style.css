@@ -1415,7 +1415,7 @@ ul.tags_links li a:hover{
     }
 }
 @media(max-width:640px){
-	.about-top img {
+    .about-top img {
 		width: 40%;
 	}
 	.about-details h4 {
@@ -1631,7 +1631,7 @@ ul.tags_links li a:hover{
 
 /*-- Media Queries Ends Here --*/
 
-/* start login style */
+/* start login reg style */
 .row-login{
     color: #f3f3f3;
     background: url(../img/test1.png)no-repeat;
@@ -1644,11 +1644,12 @@ ul.tags_links li a:hover{
     margin-right: 0;
     margin-left: 0;
 }
-.login{
+.login {
     width: 400px;
     text-align: center;
     margin-left: 40%;
     margin-right: 40%;
+    margin-top: -50px;
 }
 .input-login {
     width: 90%;
@@ -1667,4 +1668,66 @@ ul.tags_links li a:hover{
     color: #7803ed;
     text-decoration: underline;
 }
+.row-reg {
+    color: #f3f3f3;
+    background: url(../img/reg.png)no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    padding: 15.25em 0;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+}
+.input-reg {
+    width: 90%;
+    margin-left: 20px;
+    background-color: #ffffff;
+}
 /* end login style */
+
+/*start filter game*/
+.float-right {
+    float: right !important;
+}
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background: 0 0;
+    border: 0; 
+}
+.dropdown-menu {
+    margin: .125rem 0 0;
+}
+.form-noUi {
+    width: 200px;
+    margin-top: -40px;
+    float: right;
+}
+
+@media(min-width:768px) {
+    .col-sm-6 {
+        width: 64%;
+    }
+}
+
+@media(min-width: 1024px) {
+    .col-sm-6 {
+        width: 54%;
+    }
+}
+
+@media(min-width: 1440px) {
+    .col-sm-6 {
+        width: 51%;
+    }
+}
+
+    /*end filter game*/

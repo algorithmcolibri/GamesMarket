@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Profile";
+}
+
+<div class="news">
+    @*@Html.Hidden("Id", User.Identity.GetUserId())*@
+    <div class="zagol">
+        My profile
+    </div>
+    <div class="col-md-12">
+        <div class="profile-sidebar">
+            <div class="portlet light profile-sidebar-portlet ">
+                <div class="profile-userpic">
+                    <img src="../img/serg.png" class="img-responsive" alt="" style="width: 210px;">
+                </div>
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name"> @*@ViewBag.User.Name @ViewBag.User.Surname*@ </div>
+                </div>
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name"> @*@ViewBag.User.PhoneNumber*@ </div>
+                </div>
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name"> @*@ViewBag.User.Adress*@ </div>
+                </div>
+                <div class="profile-usermenu">
+                    <ul class="ul-profile">
+                        <li class="active li-profile">
+                            <a class="a-profile" href="~/UserProfile/Settings">
+                                Settings
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="profile-content">
+            <div class="row">
+                
+            </div>
+        </div>
+    </div>
+</div>
+

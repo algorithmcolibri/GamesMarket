@@ -5,53 +5,63 @@
     {
         @Html.AntiForgeryToken()
 
-        <li id="dropdown-width">
-            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-            <ul class="ulWidth">
-                <li>
-                    <a class="tx-left" href="~/UserProfile/Settings">My Wallets</a>
-                </li>
-                <li>
-                    <a class="tx-left" href="~/UserProfile/Index">My Profile</a>
-                </li>
-                <li>
-                    <a class="tx-left" href="~/UserProfile/Settings">Settings</a>
-                </li>
-                <li>
-                    <a class="tx-left" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
-                </li>
-            </ul>
+        <li>@Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+        <li>
+            <a class="tx-left" href="~/UserProfile/Profile"><img src="http://www.soidergi.com/wp-content/uploads/mo/money-bag-sign-white-icon-vector.jpg"> 555</a>
         </li>
-        <script>
-            $(function () {
-                var width = document.getElementById('dropdown-width').offsetWidth;
+        <li>
+            <a class="tx-left" href="~/UserProfile/Profile"><img src="http://жарко72.рф/wp-content/uploads/2018/03/cart.png"></a>
+        </li>
+        <li>
+            <a class="tx-left" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
+        </li>
+        @*<li id="dropdown-width">
+                @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                <ul class="ulWidth">
+                    <li>
+                        <a class="tx-left" href="~/UserProfile/Wallets">My Wallets</a>
+                    </li>
+                    <li>
+                        <a class="tx-left" href="~/UserProfile/Profile">My Profile</a>
+                    </li>
+                    <li>
+                        <a class="tx-left" href="~/UserProfile/Settings">Settings</a>
+                    </li>
+                    <li>
+                        <a class="tx-left" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
+                    </li>
+                </ul>
+            </li>
+            <script>
+                $(function () {
+                    var width = document.getElementById('dropdown-width').offsetWidth;
 
-                if (width - 15 < 140) {
-                    $('.ulWidth').each(function () {
-                        $(this).css('width', 166);
-                        $(this).css('padding', ' 8px 5px 8px 5px');
-                        $(this).css('background', 'black');
-                        $(this).css('margin-left', '-15px');
+                    if (width - 15 < 140) {
+                        $('.ulWidth').each(function () {
+                            $(this).css('width', 166);
+                            $(this).css('padding', ' 8px 5px 8px 5px');
+                            $(this).css('background', 'black');
+                            $(this).css('margin-left', '-15px');
+                        });
+                    }
+                    else {
+                        $('.ulWidth').each(function () {
+                            $(this).css('width', width + 26);
+                            $(this).css('padding', ' 8px 5px 8px 5px');
+                            $(this).css('background', 'black');
+                            $(this).css('margin-left', '-15px');
+                        });
+                    }
+                    $('.menu2').each(function () {
+                        $(this).css('display', 'contents');
                     });
-                }
-                else {
-                    $('.ulWidth').each(function () {
-                        $(this).css('width', width + 26);
-                        $(this).css('padding', ' 8px 5px 8px 5px');
-                        $(this).css('background', 'black');
-                        $(this).css('margin-left', '-15px');
+                    $('.tx-left').each(function () {
+                        $(this).css('text-align', 'left');
+                        $(this).css('margin-left', '0px');
+                        $(this).css('padding-right', '20px');
                     });
-                }
-                $('.menu2').each(function () {
-                    $(this).css('display', 'contents');
                 });
-                $('.tx-left').each(function () {
-                    $(this).css('text-align', 'left');
-                    $(this).css('margin-left', '0px');
-                    $(this).css('padding-right', '20px');
-                });
-            });
-        </script>
+            </script>*@
     }
 }
 else
