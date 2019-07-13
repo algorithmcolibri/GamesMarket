@@ -12,7 +12,7 @@ namespace GamesMarket.BusinessLogic
     {
         #region Fields
 
-        static string connectionString = @"Data Source = ; Initial Catalog = ; Integrated Security = False; Persist Security Info=False; User ID = ; Password= ";// todo Add DB Config
+        static string connectionString = @"Data Source = 128.0.175.59; Initial Catalog = GameDev_Company; Integrated Security = False; Persist Security Info=False;User ID = GameDev; Password=GameDev123456";
 
 
         #endregion
