@@ -288,6 +288,191 @@ namespace GamesMarket.Repository
 
         #region Delete
 
+        public bool DeleteTypeGame(TypeGame model)
+        {
+            string nameJanr = model.NameJanr;
+            string sql = "select nameJanr from TypeGame ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<TypeGame> models = db.Query<TypeGame>(sql);
+
+                if (models.Count(item => item.NameJanr == nameJanr) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM TypeGame WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+        public bool DeleteRam(Ram model)
+        {
+            decimal size = model.SizeRam;
+            string sql = "select ID from RAM ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<Ram> models = db.Query<Ram>(sql);
+
+                if (models.Count(item => item.SizeRam == size) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM RAM WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+        public bool DeleteOs(OS model)
+        {
+            string osVersion = model.VersionOS;
+            string sql = "select ID from OS ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<OS> models = db.Query<OS>(sql);
+
+                if (models.Count(item => item.VersionOS == osVersion) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM OS WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+
+        public bool DeleteVideoCard(VideoCard model)
+        {
+            string modelCard = model.Model;
+            string sql = "select ID from VIDEOCARD ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<VideoCard> models = db.Query<VideoCard>(sql);
+
+                if (models.Count(item => item.Model == modelCard) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM VIDEOCARD WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+        public bool DeleteCpu(Cpu model)
+        {
+            string modelCpu = model.Model;
+            string sql = "select ID from Cpu ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<Cpu> models = db.Query<Cpu>(sql);
+
+                if (models.Count(item => item.Model == modelCpu) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM Cpu WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+        public bool DeleteGameCatalog(GameCatalog model)
+        {
+            string name = model.Name;
+            string sql = "select ID from GameCatalog ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<GameCatalog> models = db.Query<GameCatalog>(sql);
+
+                if (models.Count(item => item.Name == name) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM GameCatalog WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+        public bool DeleteConfigCatalog(ConfigCatalog model)
+        {
+            int id = model.Id;
+            string sql = "select ID from ConfigCatalog ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<ConfigCatalog> models = db.Query<ConfigCatalog>(sql);
+
+                if (models.Count(item => item.Id == id) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM ConfigCatalog WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+        public bool DeleteCompConfig(CompConfig model)
+        {
+            int id = model.Id;
+            string sql = "select ID from CompConfig ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<CompConfig> models = db.Query<CompConfig>(sql);
+
+                if (models.Count(item => item.Id == id) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM CompConfig WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
         #endregion
 
         #region Update
