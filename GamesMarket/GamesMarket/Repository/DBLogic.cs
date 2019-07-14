@@ -31,6 +31,198 @@ namespace GamesMarket.Repository
 
         #region Insert
 
+        public bool InsertTypeGame(TypeGame model)
+        {
+            string nameJanr = model.NameJanr;
+            string sql = "select nameJanr from TypeGame ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<TypeGame> models = db.Query<TypeGame>(sql);
+
+                if (models.Count(item => item.NameJanr == nameJanr) > 0)
+                {
+                    return false;
+                }
+
+                sql = "insert into TypeGame (NameJanr)" +
+                    "values (@nameJanr)";
+                db.Execute(sql, new
+                {
+                    model.NameJanr
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertCpu(Cpu model)
+        {
+            string modelCpu = model.Model;
+            string sql = "select Model from Cpu ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<Cpu> models = db.Query<Cpu>(sql);
+
+                if (models.Count(item => item.Model == modelCpu) > 0)
+                {
+                    return false;
+                }
+
+                sql = "insert into Cpu (Model)" +
+                    "values (@Model)";
+                db.Execute(sql, new
+                {
+                    model.Model
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertRam(Ram model)
+        {
+            decimal size = model.SizeRam;
+            string sql = "select SizeRam from Ram ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<Ram> models = db.Query<Ram>(sql);
+
+                if (models.Count(item => item.SizeRam == size) > 0)
+                {
+                    return false;
+                }
+
+                sql = "insert into Ram (SizeRam)" +
+                    "values (@SizeRam)";
+                db.Execute(sql, new
+                {
+                    model.SizeRam
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertOs(OS model)
+        {
+            string name = model.Name;
+            string sql = "select Name from OS ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<OS> models = db.Query<OS>(sql);
+
+                if (models.Count(item => item.Name == name) > 0)
+                {
+                    return false;
+                }
+
+                sql = "insert into OS (Name, VersionOS)" +
+                    "values (@name, @VersionOS)";
+                db.Execute(sql, new
+                {
+                    model.Name,
+                    model.VersionOS
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertVideoCard(VideoCard model)
+        {
+            string modelVC = model.Model;
+            string sql = "select Model from VideoCard ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<VideoCard> models = db.Query<VideoCard>(sql);
+
+                if (models.Count(item => item.Model == modelVC) > 0)
+                {
+                    return false;
+                }
+
+                sql = "insert into VideoCard (Model, SizeVC)" +
+                    "values (@Model, @SizeVC)";
+                db.Execute(sql, new
+                {
+                    model.Model,
+                    model.SizeVC
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertGameCatalog(GameCatalog model)
+        {
+            string name = model.Name;
+            string sql = "select Name from GameCatalog ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<GameCatalog> models = db.Query<GameCatalog>(sql);
+
+                if (models.Count(item => item.Name == name) > 0)
+                {
+                    return false;
+                }
+
+                sql = "insert into GameCatalog (Name, Price, DescribeGame, TypeGame)" +
+                    "values (@Name, @Price, @DescribeGame,@TypeGame)";
+                db.Execute(sql, new
+                {
+                    model.Name,
+                    model.Price,
+                    model.DescribeGame,
+                    model.TypeGame
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertCompConfig(CompConfig model)
+        {
+
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var sql = "insert into CompConfig (CPU, OS, RAM, VideoCard)" +
+                   "values (@CPU, @OS, @RAM,@VideoCard)";
+                IEnumerable<CompConfig> models = db.Query<CompConfig>(sql);
+
+                db.Execute(sql, new
+                {
+                    model.CPU,
+                    model.OS,
+                    model.RAM,
+                    model.VideoCard
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertConfigCatalog(ConfigCatalog model)
+        {
+
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var sql = "insert into ConfigCatalog (CPU, OS, RAM, VideoCard, SizeOnDisc,GameId)" +
+                   "values (@CPU, @OS, @RAM,@VideoCard, @SizeOnDisc, @GameId)";
+                IEnumerable<ConfigCatalog> models = db.Query<ConfigCatalog>(sql);
+
+                db.Execute(sql, new
+                {
+                    model.CPU,
+                    model.OS,
+                    model.RAM,
+                    model.VideoCard,
+                    model.SizeOnDisc,
+                    model.GameId
+                });
+
+            }
+            return true;
+        }
         #endregion
 
         #region Select
@@ -476,7 +668,27 @@ namespace GamesMarket.Repository
         #endregion
 
         #region Update
+        public bool UpdateTypeGame(TypeGame model)
+        {
+            string nameJanr = model.NameJanr;
+            string sql = "select nameJanr from TypeGame ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<TypeGame> models = db.Query<TypeGame>(sql);
 
+                if (models.Count(item => item.NameJanr == nameJanr) > 0)
+                {
+                    return false;
+                }
+
+                sql = @"Update TypeGame 
+                        SET NameJanr = @NameJanr
+                        WHERE ID = @Id";
+                db.Execute(sql, model);
+
+            }
+            return true;
+        }
         #endregion
 
         #endregion
