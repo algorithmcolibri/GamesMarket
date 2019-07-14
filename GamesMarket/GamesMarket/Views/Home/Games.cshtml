@@ -19,23 +19,37 @@
         </h3>
         @*start test filter*@
         <div class="toolbar-custom">
-            <!-- <form method="post" action="#" class="float-left cold-12 col-sm-6 p-l-0 p-r-10"  onsubmit="search()"> -->
+            @using (Html.BeginForm("Games", "Home", FormMethod.Post))
+            {
             <div class="float-left cold-12 col-sm-6 p-l-0 p-r-10">
-                <div class="form-group input-icon-right" style="width:300px;">
+                <div class="form-group input-icon-right search-tx" style="width:300px;">
                     <i class="fa fa-search" id="searchBy" style="cursor:pointer"></i>
                     <input id="myInput" type="text" class="form-control search-game" placeholder="Search Game">
                 </div>
+                <div class="form-group input-icon-right search-pr">
+                    <input id="myInput" type="text" class="form-control search-game" placeholder="From $">
+                    <input id="myInput" type="text" class="form-control search-game" placeholder="To $">
+                    <button type="submit" class="btn blue but-form">Submit</button>
+                </div>
+                
+                @*<div class="form-group input-icon-right search-pc">
+            <label class="label-pc">
+                For my PC
+                <input class="input-pc" type="checkbox" value="1" name="test">
+                <span class="span-pc"></span>
+                </label>
+        </div>*@
 
                 @*<div class="form-group">
-                    <label class="col-md-3 control-label">HTML5 Input Elements</label>
-                    <div class="col-md-4">
-                        <div id="demo4" class="noUi-success"></div>
-                        <div class="well margin-top-30">
-                            <select id="demo4_select" class="form-control input-small input-inline"> </select>
-                            <input id="demo4_input" class="form-control input-small input-inline">
-                        </div>
-                    </div>
-                </div>*@
+            <label class="col-md-3 control-label">HTML5 Input Elements</label>
+            <div class="col-md-4">
+                <div id="demo4" class="noUi-success"></div>
+                <div class="well margin-top-30">
+                    <select id="demo4_select" class="form-control input-small input-inline"> </select>
+                    <input id="demo4_input" class="form-control input-small input-inline">
+                </div>
+            </div>
+        </div>*@
 
                 @*<div id="slider" class="noUi-target noUi-ltr noUi-horizontal form-noUi" style="max-width: 200px;">
             <div class="noUi-base" style="margin-top: -16px;">
@@ -58,7 +72,7 @@
                 <div class="clearfix"></div>
             </div>
 
-            @*<input id="one" type="text">
+                @*<input id="one" type="text">
             <input id="two" type="text">
 
             <script>
@@ -76,7 +90,7 @@
                 document.querySelector('#one').value = .value;
 
             </script>*@
-            <div class="dropdown float-right">
+                @*<div class="dropdown float-right">
                 <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games categories  <i class="fa fa-caret-down"></i></button>
                 <div class="dropdown-menu" id="loadCat" x-placement="bottom-start">
                     <a class="dropdown-item " catid="15">
@@ -86,17 +100,24 @@
                         Strategies
                     </a>
                 </div>
+            </div>*@
+            }
             </div>
-            <!-- </form> -->
-        </div>
             @*end test filter*@
             <div class="main">
                 <div class="view view-first">
-                    <img src="~/img/testMusor/1.jpg" />
+                    <img style="width: 300px;" src="~/img/testImg/14.jpg" />
                     <div class="mask">
-                        <h2>Game Never</h2>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                        <a href="single.html" class="info">Play It</a>
+                        <h2>30000$</h2>
+                        <p style="padding-bottom: 5px;">Choose your fate in Assassin's Creed® Odyssey. From outcast to living legend, embark on an odyssey to uncover the secrets of your past and change the fate of Ancient Greece.</p>
+                        @using (Html.BeginForm("Games", "Home", FormMethod.Post))
+                        {
+                            <div class="form-actions" style="padding-top: 0">
+                                <button type="submit" class="btn-order">Order</button>
+
+                            </div>
+                        }
+
                     </div>
                 </div>
                 <div class="view view-first">

@@ -7,14 +7,52 @@
 
         <li>@Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
         <li>
-            <a class="tx-left" href="~/UserProfile/Profile"><img src="http://www.soidergi.com/wp-content/uploads/mo/money-bag-sign-white-icon-vector.jpg"> 555</a>
+            <a class="tx-left" href="~/UserProfile/Wallets">555<img id="dollar" class="nav-icon" src="~/img/dollar-white.png" style="width:20px"></a>
         </li>
         <li>
-            <a class="tx-left" href="~/UserProfile/Profile"><img src="http://жарко72.рф/wp-content/uploads/2018/03/cart.png"></a>
+            <a class="tx-left" href="javascript:document.getElementById('logoutForm').submit()"><img id="clipart" class="nav-icon" src="~/img/clipart.png"></a>
         </li>
-        <li>
-            <a class="tx-left" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
+        <li class="fixLi">
+            <a class="tx-left" href="~/Cart/Index"><img id="cart" class="nav-icon" src="~/img/cart.png">555</a>
         </li>
+        <script>
+            $(function () {
+                $('#nav1').each(function () {
+                    $(this).css('margin-top', '10px');
+                });
+                var WindowsSize = function () {
+                    var w = $(window).width();
+                    if (w < 861) {
+                        $('#dollar').each(function () {
+                            $(this).attr('src', '/img/dollar-black.png');
+                        });
+                        $('#clipart').each(function () {
+                            $(this).attr('src', '/img/clipart-black.png');
+                        });
+                        $('#cart').each(function () {
+                            $(this).attr('src', '/img/cart-black.png');
+                        });
+                    }
+                    else {
+                        $('#dollar').each(function () {
+                            $(this).attr('src', '/img/dollar-white.png');
+                        });
+                        $('#clipart').each(function () {
+                            $(this).attr('src', '/img/clipart.png');
+                        });
+                        $('#cart').each(function () {
+                            $(this).attr('src', '/img/cart.png');
+                        });
+                        $('.fixLi').each(function () {
+                            $(this).css('margin-left', '40px');
+                        });
+                    }
+                };
+                $(document).ready(WindowsSize);
+                $(window).resize(WindowsSize); 
+                
+            });
+        </script>
         @*<li id="dropdown-width">
                 @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                 <ul class="ulWidth">
@@ -66,6 +104,6 @@
 }
 else
 {
-    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <li class="fixNavLi">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li class="fixNavLi">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 }

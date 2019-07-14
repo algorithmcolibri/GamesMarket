@@ -1,7 +1,48 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Wallets";
 }
 
-<h2>Wallets</h2>
+<div class="games">
+    <div class="container">
+        <div class="page-path">
+            <ul class="path-list">
+                <li><a href="~/Home/Index">Home</a></li>&nbsp;&nbsp;/&nbsp;&nbsp;
+                <li class="act">Wallets</li>
+            </ul>
+            <p><a href="~/Home/Index">Back to Home</a></p>
+            <div class="clearfix"></div>
+        </div>
+        <h3 class="page-header">
+            Fill in the balance
+        </h3>
+        <div class="page_content_ctn">
+            <div class="page_content">
+                <div class="addfunds_about leftcol">
+                    <p style="font-weight: 300;">Getting started with the AlgorithmColibri basket can take advantage of the purchase of any games in AlgorithmColibri.</p>
+                </div>
+                <div class="rightcol" style="margin-top: 30px;">
+                    <div class="block accountInfoBlock">
+                        <div class="block_header" style="margin-bottom: 10px;"><div>Your account AlgorithmColibri</div></div>
+                        <div class="block_content block_content_inner" style="margin-bottom: 10px;">
+                            <p>The balance of funds 4 016,45$</p>
+                        </div>
+                    </div>
+                </div>
+                @*<form id="form_addfunds" action="" method="POST">
+                    <div class="form-group input-icon-right search-tx" style="width:300px;">
+                        <input id="myInput" type="text" class="form-control search-game" placeholder="Search Game">
+                    </div>
+                    <button type="submit" class="btn blue">Submit</button>
+                </form>*@
+                @using (Html.BeginForm("Wallets", "UserProfile", FormMethod.Post))
+                {
+                    <div class="form-group input-icon-right search-tx" style="width:300px;">
+                        <input id="myInput" type="text" class="form-control search-game" placeholder="Money">
+                    </div>
+                    <button type="submit" class="btn blue but-form">Submit</button>
 
+                }
+            </div>
+        </div>
+    </div>
+</div>

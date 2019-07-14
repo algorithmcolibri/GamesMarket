@@ -173,6 +173,7 @@
     <Compile Include="BusinessLogic\BusinessLogic.cs" />
     <Compile Include="BusinessLogic\Picture.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
@@ -209,6 +210,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\components.min.css" />
     <Content Include="Content\nouislider.min.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
@@ -216,6 +218,13 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\02.jpg" />
+    <Content Include="img\cart-black.png" />
+    <Content Include="img\cart.png" />
+    <Content Include="img\clipart-black.png" />
+    <Content Include="img\clipart.png" />
+    <Content Include="img\dollar-black.png" />
+    <Content Include="img\dollar-white.png" />
+    <Content Include="img\dollar-white1.png" />
     <Content Include="img\logo.png" />
     <Content Include="img\logo1.png" />
     <Content Include="img\nav.png" />
@@ -223,6 +232,19 @@
     <Content Include="img\reg.png" />
     <Content Include="img\search.png" />
     <Content Include="img\test1.png" />
+    <Content Include="img\testImg\1.jpg" />
+    <Content Include="img\testImg\10.jpg" />
+    <Content Include="img\testImg\11.jpg" />
+    <Content Include="img\testImg\13.jpg" />
+    <Content Include="img\testImg\14.jpg" />
+    <Content Include="img\testImg\2.jpg" />
+    <Content Include="img\testImg\3.png" />
+    <Content Include="img\testImg\4.png" />
+    <Content Include="img\testImg\5.png" />
+    <Content Include="img\testImg\6.png" />
+    <Content Include="img\testImg\7.jpg" />
+    <Content Include="img\testImg\8.jpg" />
+    <Content Include="img\testImg\9.jpg" />
     <Content Include="img\testMusor\1.jpg" />
     <Content Include="img\testMusor\11.jpg" />
     <Content Include="img\testMusor\2.jpg" />
@@ -260,6 +282,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\nouislider.min.js" />
+    <Content Include="video\Assassin.mp4" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -300,6 +323,7 @@
     <Content Include="Views\UserProfile\Wallets.cshtml" />
     <Content Include="Views\UserProfile\Profile.cshtml" />
     <Content Include="Views\UserProfile\Settings.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

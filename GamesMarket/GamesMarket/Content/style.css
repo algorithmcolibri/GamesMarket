@@ -17,7 +17,6 @@ html, body{
 }
 /*-- Header Part Starts Here --*/
 /*dropdown-menu */
-
 #header-menu ul li ul {
     position: absolute;
     height: auto;
@@ -77,25 +76,34 @@ ul li ul {
 }
 ul.navig{
 	padding:0;
-	width: 55%;
+	width: 35%;
 	float: left;
-	margin-top: 10px;
+	/*margin-top: 10px;*/
 }
-ul.R{
+ul.R {
     padding: 0;
-    width: 35%;
-    float: right;
-    margin-top: 10px;
+    width: 65%;
+    margin-top: 1px;
 }
-ul.navig li{
-	display: inline-block;
-	margin:0 10px;
+.fixNavLi {
+    float: right;
+    margin-top: 9px;
+}
+ul.navig li {
+    display: inline-block;
+    margin: 0 5px;
 }
 ul.navig li a{
 	text-transform:uppercase;
-	font-size:1em;
+	font-size:0.9em;
 	color:#fff;
 	font-weight:700;
+}
+#logoutForm {
+    float: right;
+}
+.nav-icon {
+    width: 40px;
 }
 ul.navig li a:hover{
 	color:#ff7105;
@@ -509,7 +517,7 @@ width: 25%!important;
 /*-- Gallery Part Ends Here --*/
 /*-- Video search Parts starts Here --*/
 .video-serch{
-	background:url(../img/testMusor/vid-bg.jpg)no-repeat;
+	background:url(../img/testImg/13.jpg)no-repeat;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -521,7 +529,7 @@ width: 25%!important;
 	
 }
 .vid-col p{
-	font-size:1.2em;
+	font-size:2.2em;
 	font-weight:500;
 	font-style:italic;
 	color:#fff;
@@ -530,7 +538,7 @@ width: 25%!important;
 }
 .vid-col p:nth-of-type(2){
 	font-style:normal;
-	font-size:0.875em;
+	font-size:1em;
 	font-weight:100;
 	margin:1em 0;
 }
@@ -538,7 +546,7 @@ width: 25%!important;
 	margin:2em 0;
 }
 .more a{
-	font-size;0.875em;
+	font-size:0.875em;
 	color:#fff;
 	background:#ff7105;
 	padding:10px 15px;
@@ -626,10 +634,10 @@ width: 25%!important;
 	
 /*-- What new Part Ends Here --*/
 /*-- Footer part Starts Here --*/
-.footer{
-	padding:2em 0;
-	text-align:center;
-	border-top:10px solid #3c3a3e;
+.footer {
+    padding: 2em 0;
+    text-align: center;
+    border-top: 10px solid #3c3a3e;
 }
 ul.social{
 	padding:0;
@@ -1413,6 +1421,12 @@ ul.tags_links li a:hover{
     .address-box {
         width: 100%;
     }
+    .fixNavLi{
+        float:none;
+    }
+    #logoutForm {
+        float: none;
+    }
 }
 @media(max-width:640px){
     .about-top img {
@@ -1632,14 +1646,15 @@ ul.tags_links li a:hover{
 /*-- Media Queries Ends Here --*/
 
 /* start login reg style */
-.row-login{
+.row-login {
     color: #f3f3f3;
     background: url(../img/test1.png)no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     -ms-background-size: cover;
-    padding: 15.25em 0;
+    /*padding: 15.25em 0;*/
+    padding: 15.25em 0 35.25em 0;
     width: 100%;
     margin-right: 0;
     margin-left: 0;
@@ -1671,11 +1686,13 @@ ul.tags_links li a:hover{
 .row-reg {
     color: #f3f3f3;
     background: url(../img/reg.png)no-repeat;
+    background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     -ms-background-size: cover;
-    padding: 15.25em 0;
+    /*padding: 15.25em 0;*/
+    padding: 15.25em 0 35.25em 0;
     width: 100%;
     margin-right: 0;
     margin-left: 0;
@@ -1688,6 +1705,17 @@ ul.tags_links li a:hover{
 /* end login style */
 
 /*start filter game*/
+.search-tx {
+    width: 300px;
+    float: left;
+    margin-right: 50px;
+}
+.search-pr input {
+    width: 100px;
+    float: left;
+    margin-right: 25px;
+}
+
 .float-right {
     float: right !important;
 }
@@ -1714,20 +1742,67 @@ ul.tags_links li a:hover{
 
 @media(min-width:768px) {
     .col-sm-6 {
-        width: 64%;
+        width: 75%;
     }
 }
 
 @media(min-width: 1024px) {
     .col-sm-6 {
-        width: 54%;
+        width: 65%;
     }
 }
 
 @media(min-width: 1440px) {
     .col-sm-6 {
-        width: 51%;
+        width: 62%;
     }
 }
 
     /*end filter game*/
+    /*start game order*/
+.btn-order {
+    background: black;
+    border: none;
+    color: #ffffff;
+    padding: 7px 14px;
+}
+    /*end game order*/
+/*start cart */
+.container-cart {
+    margin-top: 60px;
+    margin-bottom: 50px;
+}
+.forum {
+    display: table;
+    width: 100%;
+    border: 1px solid #e4e4e4;
+    border-radius: 3px;
+}
+#customers {
+    border-collapse: collapse;
+    width: 100%;
+}
+    #customers th {
+        text-align: left;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4fbfa8;
+        color: white;
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+#customers td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+/*end cart*/
+
+/*start wallets*/
+
+.but-form {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+/*end wallets*/
