@@ -13,8 +13,7 @@ namespace GamesMarket.Repository
     {
         #region Fields
 
-        static string connectionString = @"Data Source = ; Initial Catalog = ; Integrated Security = False; Persist Security Info=False; User ID = ; Password= ";// todo Add DB Config
-
+        static string connectionString = @"Data Source = 128.0.175.59; Initial Catalog = GameDev_Company; Integrated Security = False; Persist Security Info=False;User ID = GameDev; Password=GameDev123456";
 
         #endregion
 
@@ -25,12 +24,271 @@ namespace GamesMarket.Repository
             connectionString = conn;
         }
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region Insert
+		#region Insert
 
+		public bool CreateOrder(List<Basket> baskets)
+		{
+			if(baskets.Count == 0)
+			{
+				return false;
+			}
+
+			string idUser = baskets[0].UserId;
+			double totalPrice = baskets.Sum(item => item.Price);
+
+			string sql = "select * from Wallet where IDUser = @id and Balance >= @balance";
+
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				IEnumerable<Basket> models = db.Query<Basket>(sql, param: new { id = idUser, balance = totalPrice});
+
+				if (models.Count(item => item.UserId == idUser) == 0)
+				{
+					return false;
+				}
+
+				sql = "insert into Orders (IdUser, TotalPrice)" +
+					"values (@idUser, @totalPrice)";
+				db.Execute(sql, param: new{	idUser, totalPrice	});
+				sql = "select max(IDOrder) from Orders";
+				var currentIdOrder = db.Query<int>(sql);
+				foreach(var item in baskets)
+				{
+					sql = "insert into OrderGame(iDOrder,GameId) values(@currentIdOrder, @gameId)";
+					db.Execute(sql, param: new { currentIdOrder, gameId = item.GameId });
+				}
+				LostMoneyOnWallet(idUser, totalPrice);
+			}
+			return true;
+		}
+
+
+		public bool InsertTypeGame(TypeGame model)
+        {
+            string nameJanr = model.NameJanr;
+            string sql = "select nameJanr from TypeGame ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<TypeGame> models = db.Query<TypeGame>(sql);
+
+                if (models.Count(item => item.NameJanr == nameJanr) > 0)
+                {
+                    return false;
+                }
+
+                sql = "insert into TypeGame (NameJanr)" +
+                    "values (@nameJanr)";
+                db.Execute(sql, new
+                {
+                    model.NameJanr
+                });
+
+            }
+            return true;
+        }
+
+		public static void InsertGameToBasket(Basket basket)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "insert into Basket (IDUSer, GameId, Price)" +
+					"values (@basketModel)";
+				db.Execute(sql, new { basketModel = basket });
+			}
+		}
+
+		public static void InsertWalletToNewUser(string id)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "insert into Wallet (IDUSer, Balance, Bank)" +
+					"values (@userId,0,'PrivatBank')";
+				db.Execute(sql, param: new {userId = id });
+			}
+		}
+
+		public static void InsertBasketToNewUser(string id)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "insert into Basket (IDUSer)" +
+					"values (@Id)";
+				db.Execute(sql, param: new { id });
+			}
+		}
+
+		public bool InsertCpu(Cpu model)
+        {
+            string modelCpu = model.Model;
+            string sql = "select Model from Cpu ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<Cpu> models = db.Query<Cpu>(sql);
+
+                if (models.Count(item => item.Model == modelCpu) > 0)
+                {
+                    return false;
+                }
+
+                sql = "insert into Cpu (Model)" +
+                    "values (@Model)";
+                db.Execute(sql, new
+                {
+                    model.Model
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertRam(Ram model)
+        {
+            decimal size = model.SizeRam;
+            string sql = "select SizeRam from Ram ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<Ram> models = db.Query<Ram>(sql);
+
+                if (models.Count(item => item.SizeRam == size) > 0)
+                {
+                    return false;
+                }
+
+                sql = "insert into Ram (SizeRam)" +
+                    "values (@SizeRam)";
+                db.Execute(sql, new
+                {
+                    model.SizeRam
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertOs(OS model)
+        {
+            string name = model.Name;
+            string sql = "select Name from OS ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<OS> models = db.Query<OS>(sql);
+
+                if (models.Count(item => item.Name == name) > 0)
+                {
+                    return false;
+                }
+
+                sql = "insert into OS (Name, VersionOS)" +
+                    "values (@name, @VersionOS)";
+                db.Execute(sql, new
+                {
+                    model.Name,
+                    model.VersionOS
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertVideoCard(VideoCard model)
+        {
+            string modelVC = model.Model;
+            string sql = "select Model from VideoCard ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<VideoCard> models = db.Query<VideoCard>(sql);
+
+                if (models.Count(item => item.Model == modelVC) > 0)
+                {
+                    return false;
+                }
+
+                sql = "insert into VideoCard (Model, SizeVC)" +
+                    "values (@Model, @SizeVC)";
+                db.Execute(sql, new
+                {
+                    model.Model,
+                    model.SizeVC
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertGameCatalog(GameCatalog model)
+        {
+            string name = model.Name;
+            string sql = "select Name from GameCatalog ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<GameCatalog> models = db.Query<GameCatalog>(sql);
+
+                if (models.Count(item => item.Name == name) > 0)
+                {
+                    return false;
+                }
+
+                sql = "insert into GameCatalog (Name, Price, DescribeGame, TypeGame)" +
+                    "values (@Name, @Price, @DescribeGame,@TypeGame)";
+                db.Execute(sql, new
+                {
+                    model.Name,
+                    model.Price,
+                    model.DescribeGame,
+                    model.TypeGame
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertCompConfig(CompConfig model)
+        {
+
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var sql = "insert into CompConfig (CPU, OS, RAM, VideoCard)" +
+                   "values (@CPU, @OS, @RAM,@VideoCard)";
+                IEnumerable<CompConfig> models = db.Query<CompConfig>(sql);
+
+                db.Execute(sql, new
+                {
+                    model.CPU,
+                    model.OS,
+                    model.RAM,
+                    model.VideoCard
+                });
+
+            }
+            return true;
+        }
+
+        public bool InsertConfigCatalog(ConfigCatalog model)
+        {
+
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var sql = "insert into ConfigCatalog (CPU, OS, RAM, VideoCard, SizeOnDisc,GameId)" +
+                   "values (@CPU, @OS, @RAM,@VideoCard, @SizeOnDisc, @GameId)";
+                IEnumerable<ConfigCatalog> models = db.Query<ConfigCatalog>(sql);
+
+                db.Execute(sql, new
+                {
+                    model.CPU,
+                    model.OS,
+                    model.RAM,
+                    model.VideoCard,
+                    model.SizeOnDisc,
+                    model.GameId
+                });
+
+            }
+            return true;
+        }
         #endregion
 
         #region Select
@@ -83,6 +341,23 @@ namespace GamesMarket.Repository
                 return cpu;
             }
         }
+
+		public static IList<Models.BLModel.Basket> SelectBasket(string userId)
+		{
+			var sql = "select * from Basket where IDUser = @userId";
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var result = db.Query<Models.BLModel.Basket>(sql, param: new { userId}).ToList();
+				foreach(var item in result)
+				{
+					sql = "select Name from GameCatalog where ID = @gameId";
+					var name = db.Query<string>(sql, param: new { gameId = item.GameId }).FirstOrDefault();
+					item.GameName = name;
+				}
+				return result;
+			}
+		}
+
         public IList<Models.BLModel.VideoCard> SelectVideoCard(int id = default(int)) 
         {
             var query = "SELECT * FROM VideoCard WHERE 1=1";
@@ -284,16 +559,241 @@ namespace GamesMarket.Repository
                 return typeGame;
             }
         }
-        #endregion
+		#endregion
 
-        #region Delete
+		#region Delete
+
+
+		public static void DeleteGameFromoBasket(string userId,int gameId)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "delete from Basket where UserId = @userId and GameId = @gameId" +
+					"values (@basketModel)";
+				db.Execute(sql, new { userId, gameId });
+			}
+		}
+
+		public bool DeleteTypeGame(TypeGame model)
+        {
+            string nameJanr = model.NameJanr;
+            string sql = "select nameJanr from TypeGame ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<TypeGame> models = db.Query<TypeGame>(sql);
+
+                if (models.Count(item => item.NameJanr == nameJanr) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM TypeGame WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+        public bool DeleteRam(Ram model)
+        {
+            decimal size = model.SizeRam;
+            string sql = "select ID from RAM ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<Ram> models = db.Query<Ram>(sql);
+
+                if (models.Count(item => item.SizeRam == size) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM RAM WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+        public bool DeleteOs(OS model)
+        {
+            string osVersion = model.VersionOS;
+            string sql = "select ID from OS ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<OS> models = db.Query<OS>(sql);
+
+                if (models.Count(item => item.VersionOS == osVersion) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM OS WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+
+        public bool DeleteVideoCard(VideoCard model)
+        {
+            string modelCard = model.Model;
+            string sql = "select ID from VIDEOCARD ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<VideoCard> models = db.Query<VideoCard>(sql);
+
+                if (models.Count(item => item.Model == modelCard) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM VIDEOCARD WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+        public bool DeleteCpu(Cpu model)
+        {
+            string modelCpu = model.Model;
+            string sql = "select ID from Cpu ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<Cpu> models = db.Query<Cpu>(sql);
+
+                if (models.Count(item => item.Model == modelCpu) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM Cpu WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+        public bool DeleteGameCatalog(GameCatalog model)
+        {
+            string name = model.Name;
+            string sql = "select ID from GameCatalog ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<GameCatalog> models = db.Query<GameCatalog>(sql);
+
+                if (models.Count(item => item.Name == name) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM GameCatalog WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+        public bool DeleteConfigCatalog(ConfigCatalog model)
+        {
+            int id = model.Id;
+            string sql = "select ID from ConfigCatalog ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<ConfigCatalog> models = db.Query<ConfigCatalog>(sql);
+
+                if (models.Count(item => item.Id == id) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM ConfigCatalog WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
+
+        public bool DeleteCompConfig(CompConfig model)
+        {
+            int id = model.Id;
+            string sql = "select ID from CompConfig ";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                IEnumerable<CompConfig> models = db.Query<CompConfig>(sql);
+
+                if (models.Count(item => item.Id == id) > 0)
+                {
+                    return false;
+                }
+
+                sql = "DELETE FROM CompConfig WHERE ID = @Id";
+                db.Execute(sql, new
+                {
+                    model.Id
+                });
+
+            }
+            return true;
+        }
 
         #endregion
 
         #region Update
+		
+		public static void AddMoneyOnWallet(string id, double summ)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "update Wallet set Balance = Balance + @summ" +
+					"where IDUser=@id";
+				db.Execute(sql, param: new { id, summ });
+			}
+		}
 
-        #endregion
+		public static void LostMoneyOnWallet(string id, double summ)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "update Wallet set Balance = Balance - @summ" +
+					"where IDUser=@id";
+				db.Execute(sql, param: new { id, summ });
+			}
+		}
 
-        #endregion
-    }
+		public static void AddGameToBasket(string id, double summ)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "update Basket set Balance = Balance - @summ" +
+					"where IDUser=@id";
+				db.Execute(sql, param: new { id, summ });
+			}
+		}
+		#endregion
+
+		#endregion
+	}
 }

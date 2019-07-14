@@ -181,19 +181,23 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BLModel\Basket.cs" />
     <Compile Include="Models\BLModel\CompConfig.cs" />
     <Compile Include="Models\BLModel\ConfigCatalog.cs" />
     <Compile Include="Models\BLModel\Cpu.cs" />
     <Compile Include="Models\BLModel\GameCatalog.cs" />
+    <Compile Include="Models\BLModel\Order.cs" />
     <Compile Include="Models\BLModel\OS.cs" />
     <Compile Include="Models\BLModel\Ram.cs" />
     <Compile Include="Models\BLModel\TypeGame.cs" />
     <Compile Include="Models\BLModel\VideoCard.cs" />
     <Compile Include="Models\BLModel\Wallet.cs" />
+    <Compile Include="Models\DBModel\Basket.cs" />
     <Compile Include="Models\DBModel\CompConfig.cs" />
     <Compile Include="Models\DBModel\ConfigCatalog.cs" />
     <Compile Include="Models\DBModel\Cpu.cs" />
     <Compile Include="Models\DBModel\GameCatalog.cs" />
+    <Compile Include="Models\DBModel\Order.cs" />
     <Compile Include="Models\DBModel\OS.cs" />
     <Compile Include="Models\DBModel\Ram.cs" />
     <Compile Include="Models\DBModel\TypeGame.cs" />
