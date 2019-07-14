@@ -1,6 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\GamesMarket",
+    "\\GamesMarket\\GamesMarket",
+    "\\GamesMarket\\GamesMarket\\App_Start",
+    "\\GamesMarket\\GamesMarket\\BusinessLogic",
+    "\\GamesMarket\\GamesMarket\\Controllers",
+    "\\GamesMarket\\GamesMarket\\Models"
   ],
+  "SelectedNode": "\\GamesMarket\\GamesMarket\\Models\\IdentityModels.cs",
   "PreviewInSolutionExplorer": false
 }

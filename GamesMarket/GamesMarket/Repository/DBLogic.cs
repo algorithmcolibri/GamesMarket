@@ -15,7 +15,6 @@ namespace GamesMarket.Repository
 
         static string connectionString = @"Data Source = 128.0.175.59; Initial Catalog = GameDev_Company; Integrated Security = False; Persist Security Info=False;User ID = GameDev; Password=GameDev123456";
 
-
         #endregion
 
         #region Ctor
@@ -25,13 +24,50 @@ namespace GamesMarket.Repository
             connectionString = conn;
         }
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        #region Insert
+		#region Insert
 
-        public bool InsertTypeGame(TypeGame model)
+		public bool CreateOrder(List<Basket> baskets)
+		{
+			if(baskets.Count == 0)
+			{
+				return false;
+			}
+
+			string idUser = baskets[0].UserId;
+			double totalPrice = baskets.Sum(item => item.Price);
+
+			string sql = "select * from Wallet where IDUser = @id and Balance >= @balance";
+
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				IEnumerable<Basket> models = db.Query<Basket>(sql, param: new { id = idUser, balance = totalPrice});
+
+				if (models.Count(item => item.UserId == idUser) == 0)
+				{
+					return false;
+				}
+
+				sql = "insert into Orders (IdUser, TotalPrice)" +
+					"values (@idUser, @totalPrice)";
+				db.Execute(sql, param: new{	idUser, totalPrice	});
+				sql = "select max(IDOrder) from Orders";
+				var currentIdOrder = db.Query<int>(sql);
+				foreach(var item in baskets)
+				{
+					sql = "insert into OrderGame(iDOrder,GameId) values(@currentIdOrder, @gameId)";
+					db.Execute(sql, param: new { currentIdOrder, gameId = item.GameId });
+				}
+				LostMoneyOnWallet(idUser, totalPrice);
+			}
+			return true;
+		}
+
+
+		public bool InsertTypeGame(TypeGame model)
         {
             string nameJanr = model.NameJanr;
             string sql = "select nameJanr from TypeGame ";
@@ -55,7 +91,37 @@ namespace GamesMarket.Repository
             return true;
         }
 
-        public bool InsertCpu(Cpu model)
+		public static void InsertGameToBasket(Basket basket)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "insert into Basket (IDUSer, GameId, Price)" +
+					"values (@basketModel)";
+				db.Execute(sql, new { basketModel = basket });
+			}
+		}
+
+		public static void InsertWalletToNewUser(string id)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "insert into Wallet (IDUSer, Balance, Bank)" +
+					"values (@userId,0,'PrivatBank')";
+				db.Execute(sql, param: new {userId = id });
+			}
+		}
+
+		public static void InsertBasketToNewUser(string id)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "insert into Basket (IDUSer)" +
+					"values (@Id)";
+				db.Execute(sql, param: new { id });
+			}
+		}
+
+		public bool InsertCpu(Cpu model)
         {
             string modelCpu = model.Model;
             string sql = "select Model from Cpu ";
@@ -275,6 +341,23 @@ namespace GamesMarket.Repository
                 return cpu;
             }
         }
+
+		public static IList<Models.BLModel.Basket> SelectBasket(string userId)
+		{
+			var sql = "select * from Basket where IDUser = @userId";
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var result = db.Query<Models.BLModel.Basket>(sql, param: new { userId}).ToList();
+				foreach(var item in result)
+				{
+					sql = "select Name from GameCatalog where ID = @gameId";
+					var name = db.Query<string>(sql, param: new { gameId = item.GameId }).FirstOrDefault();
+					item.GameName = name;
+				}
+				return result;
+			}
+		}
+
         public IList<Models.BLModel.VideoCard> SelectVideoCard(int id = default(int)) 
         {
             var query = "SELECT * FROM VideoCard WHERE 1=1";
@@ -476,11 +559,22 @@ namespace GamesMarket.Repository
                 return typeGame;
             }
         }
-        #endregion
+		#endregion
 
-        #region Delete
+		#region Delete
 
-        public bool DeleteTypeGame(TypeGame model)
+
+		public static void DeleteGameFromoBasket(string userId,int gameId)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "delete from Basket where UserId = @userId and GameId = @gameId" +
+					"values (@basketModel)";
+				db.Execute(sql, new { userId, gameId });
+			}
+		}
+
+		public bool DeleteTypeGame(TypeGame model)
         {
             string nameJanr = model.NameJanr;
             string sql = "select nameJanr from TypeGame ";
@@ -668,29 +762,38 @@ namespace GamesMarket.Repository
         #endregion
 
         #region Update
-        public bool UpdateTypeGame(TypeGame model)
-        {
-            string nameJanr = model.NameJanr;
-            string sql = "select nameJanr from TypeGame ";
-            using (IDbConnection db = new SqlConnection(connectionString))
-            {
-                IEnumerable<TypeGame> models = db.Query<TypeGame>(sql);
+		
+		public static void AddMoneyOnWallet(string id, double summ)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "update Wallet set Balance = Balance + @summ" +
+					"where IDUser=@id";
+				db.Execute(sql, param: new { id, summ });
+			}
+		}
 
-                if (models.Count(item => item.NameJanr == nameJanr) > 0)
-                {
-                    return false;
-                }
+		public static void LostMoneyOnWallet(string id, double summ)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "update Wallet set Balance = Balance - @summ" +
+					"where IDUser=@id";
+				db.Execute(sql, param: new { id, summ });
+			}
+		}
 
-                sql = @"Update TypeGame 
-                        SET NameJanr = @NameJanr
-                        WHERE ID = @Id";
-                db.Execute(sql, model);
+		public static void AddGameToBasket(string id, double summ)
+		{
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var sql = "update Basket set Balance = Balance - @summ" +
+					"where IDUser=@id";
+				db.Execute(sql, param: new { id, summ });
+			}
+		}
+		#endregion
 
-            }
-            return true;
-        }
-        #endregion
-
-        #endregion
-    }
+		#endregion
+	}
 }
