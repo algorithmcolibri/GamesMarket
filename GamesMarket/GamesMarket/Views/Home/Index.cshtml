@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<GamesMarket.Models.BLModel.GameCatalog>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -16,25 +18,52 @@
         <h3>Gallery</h3>
         <div class="gallery-top">
             @*<ul id="filters" class="clearfix">
-                <li><span class="filter active" data-filter="app card icon logo web">1</span></li>
-                <li><span class="filter" data-filter="app">2</span></li>
-                <li><span class="filter" data-filter="card">3</span></li>
-                <li><span class="filter" data-filter="icon">4</span></li>
-            </ul>*@
+                    <li><span class="filter active" data-filter="app card icon logo web">1</span></li>
+                    <li><span class="filter" data-filter="app">2</span></li>
+                    <li><span class="filter" data-filter="card">3</span></li>
+                    <li><span class="filter" data-filter="icon">4</span></li>
+                </ul>*@
             <div id="portfoliolist">
                 <div class="portfolio app mix_all" data-cat="app" style="display: inline-block; opacity: 1;">
                     <div class="portfolio-wrapper">
                         <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                            <img src="~/img/testImg/1.jpg" style="width: 670px; height: 270px;" /><div class="b-wrapper">
-                                <h2 class="b-animate b-from-left    b-delay03 "> </h2>
+                            <img src="~/img/testImg/16.png" style="width: 670px; height: 270px;" />
+                            @if (Request.IsAuthenticated)
+                            {
+                            <div class="b-wrapper">
+
+
+                                <h2 class="b-animate b-from-left    b-delay03 buy-h2">70$</h2>
+                                <p class="b-animate b-from-left buy-p">Living as a man outside the shadow of the gods, kratos must adapt to the unfamiliar norse lands, unexpected threats, and a second chance at being a father.</p>
+                                @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                                {
+                                    @Html.Hidden("Id", 5)
+                                    @Html.Hidden("Name", "God of War")
+                                    @Html.Hidden("Price", 70)
+                                    <div class="form-actions" style="padding-top: 0">
+                                        <button type="submit" class="b-animate b-from-left btn-order btn-home">Order Now</button>
+
+                                    </div>
+                                }
                             </div>
+                            }
+                            else
+                            {
+                                <div class="b-wrapper">
+                                    <h2 class="b-animate b-from-left    b-delay03 buy-h2">100$</h2>
+                                    <p class="b-animate b-from-left buy-p">Game</p>
+                                    <button type="button" onclick="window.location.href='@Url.Action("Login", "Account")';" class="b-animate b-from-left btn-order btn-home">Order Now</button>
+                                </div>
+                                
+                            }
+
                         </a>
                     </div>
                 </div>
                 <div class="portfolio icon mix_all" data-cat="icon" style="display: inline-block; opacity: 1;">
                     <div class="portfolio-wrapper">
                         <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                            <img src="~/img/testImg/2.jpg" style="width: 470px; height: 270px;"/><div class="b-wrapper">
+                            <img src="~/img/testImg/2.jpg" style="width: 470px; height: 270px;" /><div class="b-wrapper">
                                 <h2 class="b-animate b-from-left    b-delay03 "> </h2>
                             </div>
                         </a>
@@ -43,7 +72,7 @@
                 <div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
                     <div class="portfolio-wrapper">
                         <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                            <img src="~/img/testImg/11.jpg"  style="width: 300px; height: 270px;" /><div class="b-wrapper">
+                            <img src="~/img/testImg/11.jpg" style="width: 300px; height: 270px;" /><div class="b-wrapper">
                                 <h2 class="b-animate b-from-left    b-delay03 "> </h2>
                             </div>
                         </a>
@@ -52,7 +81,7 @@
                 <div class="portfolio logos mix_all" data-cat="logo" style="display: inline-block; opacity: 1;">
                     <div class="portfolio-wrapper">
                         <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                            <img src="~/img/testImg/3.png" style="width: 500px; height: 270px;"/><div class="b-wrapper">
+                            <img src="~/img/testImg/17.png" style="width: 500px; height: 270px;" /><div class="b-wrapper">
                                 <h2 class="b-animate b-from-left    b-delay03 "> </h2>
                             </div>
                         </a>
@@ -61,7 +90,7 @@
                 <div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
                     <div class="portfolio-wrapper">
                         <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                            <img src="~/img/testImg/9.jpg" style="width: 300px; height: 270px;"/><div class="b-wrapper">
+                            <img src="~/img/testImg/9.jpg" style="width: 300px; height: 270px;" /><div class="b-wrapper">
                                 <h2 class="b-animate b-from-left    b-delay03 "> </h2>
                             </div>
                         </a>
@@ -82,16 +111,38 @@
                 Choose your fate in Assassin's Creed® Odyssey.
                 From outcast to living legend, embark on an odyssey to uncover the secrets of your past and change the fate of Ancient Greece.
             </p>
+            <p style="font-size: 1.2em; margin: 0;">Price 50$</p>
+            <div class="more" style="margin: 1em 0;">
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                    {
+                        @*@Html.Hidden("Id", Model.ElementAt(1).Id)
+                        @Html.Hidden("Name", Model.ElementAt(1).Name)
+                        @Html.Hidden("Price", Model.ElementAt(1).Price)*@
+                        @Html.Hidden("Id", 3)
+                        @Html.Hidden("Name", "Assassin's Creed Odyssey")
+                        @Html.Hidden("Price", 50)
+                        <div class="form-actions" style="padding-top: 0">
+                            <button type="submit" class="btn-order" style=" background:#ff7105">Order now</button>
+
+                        </div>
+                    }
+                }
+                else {
+                        <a href="~/Account/Login">Order now</a>
+                }
+            </div>
             @*<div class="more">
-                <a href="#">See more videos</a>
-            </div>*@
+                    <a href="#">See more videos</a>
+                </div>*@
         </div>
         <div class="col-md-6 vid-coll">
             @*<iframe width="500" height="300" src="Assassin's Creed Odyssey_ E3 2019 Story Creator Mode _ Launch Trailer _ Ubisoft [NA] (720p).mp4" frameborder="0" allowfullscreen></iframe>*@
             @*<img src="~/img/testImg/14.jpg" alt="">*@
             <video width="600" controls="controls" poster="~/img/testImg/14.jpg">
                 <source src="~/video/Assassin.mp4" type='video/mp4'>
-                Элемент video не поддерживается вашим браузером.
+                The video element is not supported by your browser.
             </video>
         </div>
         <div class="clearfix"></div>
@@ -105,23 +156,23 @@
         <div class="blog-news">
             <div class="blog-news-grid">
                 <div class="news-grid-left">
-                    <h4>06</h4>
-                    <small>of january 2015</small>
+                    <h4>01</h4>
+                    <small>of july 2019</small>
                 </div>
                 <div class="news-grid-right">
-                    <h4>Claritas est etiam processus</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim </p>
+                    <h4>Creating a site for practice</h4>
+                    <p>Benja site</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="blog-news-grid b_n_g">
                 <div class="news-grid-left">
-                    <h4>28</h4>
-                    <small>of january 2015</small>
+                    <h4>07</h4>
+                    <small>of july 2019</small>
                 </div>
                 <div class="news-grid-right">
-                    <h4>Claritas est etiam processus</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim </p>
+                    <h4>Creating a site for practice</h4>
+                    <p>Benja site </p>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -130,23 +181,23 @@
         <div class="blog-news b_n">
             <div class="blog-news-grid">
                 <div class="news-grid-left">
-                    <h4>21</h4>
-                    <small>of january 2015</small>
+                    <h4>11</h4>
+                    <small>of july 2019</small>
                 </div>
                 <div class="news-grid-right">
-                    <h4>Claritas est etiam processus</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim </p>
+                    <h4>Creating a site for practice</h4>
+                    <p>Benja site </p>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="blog-news-grid b_n_g">
                 <div class="news-grid-left">
-                    <h4>05</h4>
-                    <small>of january 2015</small>
+                    <h4>15</h4>
+                    <small>of july 2019</small>
                 </div>
                 <div class="news-grid-right">
-                    <h4>Claritas est etiam processus</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim </p>
+                    <h4>Creating a site for practice</h4>
+                    <p>Benja site</p>
                 </div>
                 <div class="clearfix"></div>
             </div>

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model GamesMarket.Models.BLModel.Wallet
+@{
     ViewBag.Title = "Wallets";
 }
 
@@ -24,23 +25,28 @@
                     <div class="block accountInfoBlock">
                         <div class="block_header" style="margin-bottom: 10px;"><div>Your account AlgorithmColibri</div></div>
                         <div class="block_content block_content_inner" style="margin-bottom: 10px;">
-                            <p>The balance of funds 4 016,45$</p>
+                            <p>The balance of funds @ViewBag.balanc$</p>
                         </div>
                     </div>
                 </div>
+
                 @*<form id="form_addfunds" action="" method="POST">
-                    <div class="form-group input-icon-right search-tx" style="width:300px;">
-                        <input id="myInput" type="text" class="form-control search-game" placeholder="Search Game">
-                    </div>
-                    <button type="submit" class="btn blue">Submit</button>
-                </form>*@
+            <div class="form-group input-icon-right search-tx" style="width:300px;">
+                <input id="myInput" type="text" class="form-control search-game" placeholder="Search Game">
+            </div>
+            <button type="submit" class="btn blue">Submit</button>
+        </form>*@
+                @Html.ValidationMessageFor(model => model.Balance, "", new { @class = "error-text" })
                 @using (Html.BeginForm("Wallets", "UserProfile", FormMethod.Post))
                 {
+                    @Html.ValidationSummary(true)
+
                     <div class="form-group input-icon-right search-tx" style="width:300px;">
-                        <input id="myInput" type="text" class="form-control search-game" placeholder="Money">
+
+                        <input id="myInput" type="text" class="form-control search-game" placeholder="Money" name="Balance">
+
                     </div>
                     <button type="submit" class="btn blue but-form">Submit</button>
-
                 }
             </div>
         </div>

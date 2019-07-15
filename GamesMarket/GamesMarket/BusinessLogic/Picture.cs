@@ -22,6 +22,10 @@ namespace GamesMarket.BusinessLogic
 
 		public static string BytesToPicture(byte[] picture, int count)
 		{
+            if (picture == null)
+            {
+                return "";
+            }
 			char from = (char)92;
 			char to = (char)47;
 			MemoryStream memoryStream1 = new MemoryStream();
@@ -31,9 +35,9 @@ namespace GamesMarket.BusinessLogic
 				memoryStream1.WriteByte(pic);
 			}
 			Image image = Image.FromStream(memoryStream1);
-			string path = Path.Combine(HostingEnvironment.ApplicationPhysicalPath + "img1", "picture" + count + ".png");
+			string path = Path.Combine(HostingEnvironment.ApplicationPhysicalPath + "img1", "pictureTest" + count + ".png");
 			image.Save(path, System.Drawing.Imaging.ImageFormat.Png);
-			return to + Path.Combine("img1", "picture" + count + ".png").Replace(from, to);
+			return to + Path.Combine("img1", "pictureTest" + count + ".png").Replace(from, to);
 
 		}
 

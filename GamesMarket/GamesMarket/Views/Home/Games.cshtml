@@ -1,4 +1,5 @@
-﻿
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<GamesMarket.Models.BLModel.GameCatalog>
 @{
     ViewBag.Title = "Games";
 }
@@ -19,201 +20,204 @@
         </h3>
         @*start test filter*@
         <div class="toolbar-custom">
-            @using (Html.BeginForm("Games", "Home", FormMethod.Post))
+            @using (Html.BeginForm("Games", "Home", FormMethod.Get))
             {
-            <div class="float-left cold-12 col-sm-6 p-l-0 p-r-10">
-                <div class="form-group input-icon-right search-tx" style="width:300px;">
-                    <i class="fa fa-search" id="searchBy" style="cursor:pointer"></i>
-                    <input id="myInput" type="text" class="form-control search-game" placeholder="Search Game">
-                </div>
-                <div class="form-group input-icon-right search-pr">
-                    <input id="myInput" type="text" class="form-control search-game" placeholder="From $">
-                    <input id="myInput" type="text" class="form-control search-game" placeholder="To $">
-                    <button type="submit" class="btn blue but-form">Submit</button>
-                </div>
-                
-                @*<div class="form-group input-icon-right search-pc">
-            <label class="label-pc">
-                For my PC
-                <input class="input-pc" type="checkbox" value="1" name="test">
-                <span class="span-pc"></span>
-                </label>
-        </div>*@
-
-                @*<div class="form-group">
-            <label class="col-md-3 control-label">HTML5 Input Elements</label>
-            <div class="col-md-4">
-                <div id="demo4" class="noUi-success"></div>
-                <div class="well margin-top-30">
-                    <select id="demo4_select" class="form-control input-small input-inline"> </select>
-                    <input id="demo4_input" class="form-control input-small input-inline">
-                </div>
-            </div>
-        </div>*@
-
-                @*<div id="slider" class="noUi-target noUi-ltr noUi-horizontal form-noUi" style="max-width: 200px;">
-            <div class="noUi-base" style="margin-top: -16px;">
-                <div class="noUi-connects">
-                    <div class="noUi-connect" style="transform: translate(18.255%, 0px) scale(0.557047, 1);"></div>
-                </div>
-                <div class="noUi-origin" style="transform: translate(-817.45%, 0px); z-index: 5; display: none">
-                    <div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="74.0" aria-valuenow="18.3" aria-valuetext="18.26">
-                        <div class="noUi-touch-area"></div>
+                <div class="float-left cold-12 col-sm-6 p-l-0 p-r-10">
+                    <div class="form-group input-icon-right search-tx" style="width:300px;">
+                        <i class="fa fa-search" id="searchBy" style="cursor:pointer"></i>
+                        <input id="myInput" type="text" class="form-control search-game" placeholder="Search Game" name="SearchGame">
                     </div>
-                </div>
-                <div class="noUi-origin" style="transform: translate(-260.403%, 0px); z-index: 4; display: none">
-                    <div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="18.3" aria-valuemax="100.0" aria-valuenow="74.0" aria-valuetext="73.96">
-                        <div class="noUi-touch-area"></div>
+                    <div class="form-group input-icon-right search-pr">
+                        <input id="myInput" type="text" class="form-control search-game" placeholder="From $" name="From">
+                        <input id="myInput" type="text" class="form-control search-game" placeholder="To $" name="To">
+                        <button type="submit" class="btn blue but-form">Submit</button>
                     </div>
-                </div>
-            </div>
-        </div>*@
 
-                <div class="clearfix"></div>
-            </div>
+                    @*<div class="form-group input-icon-right search-pc">
+                            <label class="label-pc">
+                                For my PC
+                                <input class="input-pc" type="checkbox" value="1" name="test">
+                                <span class="span-pc"></span>
+                                </label>
+                        </div>*@
+
+                    @*<div class="form-group">
+                            <label class="col-md-3 control-label">HTML5 Input Elements</label>
+                            <div class="col-md-4">
+                                <div id="demo4" class="noUi-success"></div>
+                                <div class="well margin-top-30">
+                                    <select id="demo4_select" class="form-control input-small input-inline"> </select>
+                                    <input id="demo4_input" class="form-control input-small input-inline">
+                                </div>
+                            </div>
+                        </div>*@
+
+                    @*<div id="slider" class="noUi-target noUi-ltr noUi-horizontal form-noUi" style="max-width: 200px;">
+                            <div class="noUi-base" style="margin-top: -16px;">
+                                <div class="noUi-connects">
+                                    <div class="noUi-connect" style="transform: translate(18.255%, 0px) scale(0.557047, 1);"></div>
+                                </div>
+                                <div class="noUi-origin" style="transform: translate(-817.45%, 0px); z-index: 5; display: none">
+                                    <div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="74.0" aria-valuenow="18.3" aria-valuetext="18.26">
+                                        <div class="noUi-touch-area"></div>
+                                    </div>
+                                </div>
+                                <div class="noUi-origin" style="transform: translate(-260.403%, 0px); z-index: 4; display: none">
+                                    <div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="18.3" aria-valuemax="100.0" aria-valuenow="74.0" aria-valuetext="73.96">
+                                        <div class="noUi-touch-area"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+
+                    <div class="clearfix"></div>
+                </div>
 
                 @*<input id="one" type="text">
-            <input id="two" type="text">
+                    <input id="two" type="text">
 
-            <script>
-                var slider = document.getElementById('slider');
+                    <script>
+                        var slider = document.getElementById('slider');
 
-                noUiSlider.create(slider, {
-                    start: [0, 100],
-                    connect: true,
-                    range: {
-                        'min': 0,
-                        'max': 100
-                    }
-                });
+                        noUiSlider.create(slider, {
+                            start: [0, 100],
+                            connect: true,
+                            range: {
+                                'min': 0,
+                                'max': 100
+                            }
+                        });
 
-                document.querySelector('#one').value = .value;
+                        document.querySelector('#one').value = .value;
 
-            </script>*@
+                    </script>*@
                 @*<div class="dropdown float-right">
-                <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games categories  <i class="fa fa-caret-down"></i></button>
-                <div class="dropdown-menu" id="loadCat" x-placement="bottom-start">
-                    <a class="dropdown-item " catid="15">
-                        Shooting
-                    </a>
-                    <a class="dropdown-item " catid="16">
-                        Strategies
-                    </a>
-                </div>
-            </div>*@
+                        <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games categories  <i class="fa fa-caret-down"></i></button>
+                        <div class="dropdown-menu" id="loadCat" x-placement="bottom-start">
+                            <a class="dropdown-item " catid="15">
+                                Shooting
+                            </a>
+                            <a class="dropdown-item " catid="16">
+                                Strategies
+                            </a>
+                        </div>
+                    </div>*@
             }
-            </div>
-            @*end test filter*@
-            <div class="main">
-                <div class="view view-first">
-                    <img style="width: 300px;" src="~/img/testImg/14.jpg" />
-                    <div class="mask">
-                        <h2>30000$</h2>
-                        <p style="padding-bottom: 5px;">Choose your fate in Assassin's Creed® Odyssey. From outcast to living legend, embark on an odyssey to uncover the secrets of your past and change the fate of Ancient Greece.</p>
-                        @using (Html.BeginForm("Games", "Home", FormMethod.Post))
+        </div>
+        @*end test filter*@
+        <div class="main">
+            <p class="mes" style="font-size: 25px;
+    text-transform: uppercase;">@ViewBag.mes</p>
+            @foreach (var item in Model)
+            {
+            <div class="view view-first">
+                @*<img style="width: 300px;" src="~/img/testImg/14.jpg" />*@
+                <img style="width: 300px; height: 180px;" src="@item.Photo" />
+                <div class="mask">
+                    <h2>@item.Price$</h2>
+                    <p style="padding-bottom: 5px;">@item.DescribeGame</p>
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("Games", "Home", FormMethod.Post))
                         {
+                            @Html.Hidden("Id", item.Id);
+                            @Html.Hidden("Name", item.Name);
+                            @Html.Hidden("Price", item.Price);
                             <div class="form-actions" style="padding-top: 0">
                                 <button type="submit" class="btn-order">Order</button>
 
                             </div>
                         }
-
-                    </div>
-                </div>
-                <div class="view view-first">
-                    <img src="~/img/testMusor/2.jpg" />
-                    <div class="mask">
-                        <h2>Online Game</h2>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                        <a href="single.html" class="info">Play It</a>
-                    </div>
-                </div>
-                <div class="view view-first">
-                    <img src="~/img/testMusor/3.jpg" />
-                    <div class="mask">
-                        <h2>Delmen lorem</h2>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                        <a href="single.html" class="info">Play It</a>
-                    </div>
-                </div>
-                <div class="view view-first">
-                    <img src="~/img/testMusor/4.jpg" />
-                    <div class="mask">
-                        <h2>Ipsum street</h2>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                        <a href="single.html" class="info">Play It</a>
-                    </div>
-                </div>
-                <div class="view view-first">
-                    <img src="~/img/testMusor/5.jpg" />
-                    <div class="mask">
-                        <h2>Games online</h2>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                        <a href="single.html" class="info">Play It</a>
-                    </div>
-                </div>
-                <div class="view view-first">
-                    <img src="~/img/testMusor/6.jpg" />
-                    <div class="mask">
-                        <h2>Nothing but Game</h2>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                        <a href="single.html" class="info">Play It</a>
-                    </div>
-                </div>
-                <div class="view view-first">
-                    <img src="~/img/testMusor/2.jpg" />
-                    <div class="mask">
-                        <h2>Ipsum street</h2>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                        <a href="single.html" class="info">Play It</a>
-                    </div>
-                </div>
-                <div class="view view-first">
-                    <img src="~/img/testMusor/1.jpg" />
-                    <div class="mask">
-                        <h2>Games online</h2>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                        <a href="single.html" class="info">Play It</a>
-                    </div>
-                </div>
-                <div class="view view-first">
-                    <img src="~/img/testMusor/4.jpg" />
-                    <div class="mask">
-                        <h2>Nothing but Game</h2>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                        <a href="single.html" class="info">Play It</a>
-                    </div>
+                    }
+                    else
+                    {
+                        <a href="~/Account/Login" class="info">Order</a>
+                    }
                 </div>
             </div>
-            <div class="side-bar">
-                <h4>New games</h4>
-                <ul class="game-list">
-                    <li><a href="games.html">Shooting</a></li>
-                    <li><a href="games.html">Action</a></li>
-                    <li><a href="games.html">Cars</a></li>
-                    <li><a href="games.html">Wressling</a></li>
-                    <li><a href="games.html">bikes</a></li>
-                    <li><a href="games.html">bicycle</a></li>
-                    <li><a href="games.html">Racing</a></li>
-                    <li><a href="games.html">Zombies</a></li>
-                </ul>
-                <h4>Old games</h4>
-                <ul class="game-list">
-                    <li><a href="games.html">Shooting</a></li>
-                    <li><a href="games.html">Action</a></li>
-                    <li><a href="games.html">Cars</a></li>
-                    <li><a href="games.html">Wressling</a></li>
-                    <li><a href="games.html">bikes</a></li>
-                    <li><a href="games.html">bicycle</a></li>
-                    <li><a href="games.html">Racing</a></li>
-                    <li><a href="games.html">Zombies</a></li>
-                    <li><a href="games.html">Action</a></li>
-                    <li><a href="games.html">Cars</a></li>
-                    <li><a href="games.html">Wressling</a></li>
-                </ul>
+            }
+            @*<div class="view view-first">
+                <img src="~/img/testMusor/2.jpg" />
+                <div class="mask">
+                    <h2>Online Game</h2>
+                    <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                    <a href="single.html" class="info">Play It</a>
+                </div>
             </div>
-            <div class="clearfix"></div>
+            <div class="view view-first">
+                <img src="~/img/testMusor/3.jpg" />
+                <div class="mask">
+                    <h2>Delmen lorem</h2>
+                    <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                    <a href="single.html" class="info">Play It</a>
+                </div>
+            </div>
+            <div class="view view-first">
+                <img src="~/img/testMusor/4.jpg" />
+                <div class="mask">
+                    <h2>Ipsum street</h2>
+                    <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                    <a href="single.html" class="info">Play It</a>
+                </div>
+            </div>
+            <div class="view view-first">
+                <img src="~/img/testMusor/5.jpg" />
+                <div class="mask">
+                    <h2>Games online</h2>
+                    <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                    <a href="single.html" class="info">Play It</a>
+                </div>
+            </div>
+            <div class="view view-first">
+                <img src="~/img/testMusor/6.jpg" />
+                <div class="mask">
+                    <h2>Nothing but Game</h2>
+                    <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                    <a href="single.html" class="info">Play It</a>
+                </div>
+            </div>
+            <div class="view view-first">
+                <img src="~/img/testMusor/2.jpg" />
+                <div class="mask">
+                    <h2>Ipsum street</h2>
+                    <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                    <a href="single.html" class="info">Play It</a>
+                </div>
+            </div>
+            <div class="view view-first">
+                <img src="~/img/testMusor/1.jpg" />
+                <div class="mask">
+                    <h2>Games online</h2>
+                    <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                    <a href="single.html" class="info">Play It</a>
+                </div>
+            </div>
+            <div class="view view-first">
+                <img src="~/img/testMusor/4.jpg" />
+                <div class="mask">
+                    <h2>Nothing but Game</h2>
+                    <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                    <a href="single.html" class="info">Play It</a>
+                </div>
+            </div>*@
         </div>
+        <div class="side-bar">
+            <h4>Type games</h4>
+            <ul class="game-list">
+                @foreach(var item in ViewBag.TypeGame)
+                {
+                <li>
+                    @using (Html.BeginForm("Games", "Home", FormMethod.Post))
+                    {
+                        @*<a href="games.html"></a>*@
+                        <a onclick="location.href = '@Url.Action("Games", "Home", new { id = @item.Id})'">@item.NameJanr</a>
+                    }
+                </li>
+                }
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
 </div>
 
 <!-- Games Page Ends here -->
@@ -224,23 +228,23 @@
         <div class="blog-news">
             <div class="blog-news-grid">
                 <div class="news-grid-left">
-                    <h4>06</h4>
-                    <small>of january 2015</small>
+                    <h4>01</h4>
+                    <small>of july 2019</small>
                 </div>
                 <div class="news-grid-right">
-                    <h4>Claritas est etiam processus</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim </p>
+                    <h4>Creating a site for practice</h4>
+                    <p>Benja site</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="blog-news-grid b_n_g">
                 <div class="news-grid-left">
-                    <h4>28</h4>
-                    <small>of january 2015</small>
+                    <h4>07</h4>
+                    <small>of july 2019</small>
                 </div>
                 <div class="news-grid-right">
-                    <h4>Claritas est etiam processus</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim </p>
+                    <h4>Creating a site for practice</h4>
+                    <p>Benja site </p>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -249,23 +253,23 @@
         <div class="blog-news b_n">
             <div class="blog-news-grid">
                 <div class="news-grid-left">
-                    <h4>21</h4>
-                    <small>of january 2015</small>
+                    <h4>11</h4>
+                    <small>of july 2019</small>
                 </div>
                 <div class="news-grid-right">
-                    <h4>Claritas est etiam processus</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim </p>
+                    <h4>Creating a site for practice</h4>
+                    <p>Benja site </p>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="blog-news-grid b_n_g">
                 <div class="news-grid-left">
-                    <h4>05</h4>
-                    <small>of january 2015</small>
+                    <h4>15</h4>
+                    <small>of july 2019</small>
                 </div>
                 <div class="news-grid-right">
-                    <h4>Claritas est etiam processus</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim </p>
+                    <h4>Creating a site for practice</h4>
+                    <p>Benja site</p>
                 </div>
                 <div class="clearfix"></div>
             </div>

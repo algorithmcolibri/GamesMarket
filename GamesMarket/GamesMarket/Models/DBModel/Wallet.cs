@@ -7,7 +7,7 @@ namespace GamesMarket.Models.DBModel
 {
     public class Wallet
     {
-        public int Id { get; set; }
+        public string IdUser { get; set; }
         public decimal Balance { get; set; }
         public string Bank { get; set; }
 

@@ -7,13 +7,13 @@
 
         <li>@Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
         <li>
-            <a class="tx-left" href="~/UserProfile/Wallets">555<img id="dollar" class="nav-icon" src="~/img/dollar-white.png" style="width:20px"></a>
+            <a class="tx-left" href="~/UserProfile/Wallets">@ViewBag.balanc<img id="dollar" class="nav-icon" src="~/img/dollar-white.png" style="width:20px"></a>
         </li>
         <li>
             <a class="tx-left" href="javascript:document.getElementById('logoutForm').submit()"><img id="clipart" class="nav-icon" src="~/img/clipart.png"></a>
         </li>
         <li class="fixLi">
-            <a class="tx-left" href="~/Cart/Index"><img id="cart" class="nav-icon" src="~/img/cart.png">555</a>
+            <a class="tx-left" href="~/Cart/Index"><img id="cart" class="nav-icon" src="~/img/cart.png">@ViewBag.sum<img id="dollar" class="nav-icon" src="~/img/dollar-white.png" style="width:20px"></a>
         </li>
         <script>
             $(function () {

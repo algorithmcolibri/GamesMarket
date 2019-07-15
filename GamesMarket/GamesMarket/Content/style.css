@@ -379,7 +379,6 @@ ul#filters {
 .b-link-stripe:hover .b-line{
 	opacity:1;
 }
-}
 #filters {
 	margin: 3% 0;
 	padding: 0;
@@ -517,7 +516,7 @@ width: 25%!important;
 /*-- Gallery Part Ends Here --*/
 /*-- Video search Parts starts Here --*/
 .video-serch{
-	background:url(../img/testImg/13.jpg)no-repeat;
+	background:url(../img/testImg/15.png)no-repeat;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -1765,6 +1764,10 @@ ul.tags_links li a:hover{
     border: none;
     color: #ffffff;
     padding: 7px 14px;
+    text-transform: uppercase;
+}
+.btn-home {
+    font-size: 0.875em;
 }
     /*end game order*/
 /*start cart */
@@ -1796,6 +1799,15 @@ ul.tags_links li a:hover{
     border: 1px solid #ddd;
     padding: 8px;
 }
+.btn-del {
+    font-weight: 600;
+    width: auto;
+    font-size: 14px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
 /*end cart*/
 
 /*start wallets*/
@@ -1805,4 +1817,23 @@ ul.tags_links li a:hover{
     background-color: #337ab7;
     border-color: #2e6da4;
 }
+.error-text {
+    color: red;
+    padding-left: 10px;
+}
 /*end wallets*/
+
+/*start home buy game*/
+.buy-h2 {
+    padding: 10px;
+    margin-top: 50px;
+    background: rgba(0, 0, 0, 0.8);
+}
+.buy-p {
+    padding-bottom: 10px;
+    margin-top: 20px;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-style: italic;
+}
+/*end home buy game*/

@@ -7,7 +7,8 @@ namespace GamesMarket.Models.DBModel
 {
 	public class Basket
 	{
-		public string UserId { get; set; }
+        public int Id { get; set; }
+        public string IdUser { get; set; }
 		public int GameId { get; set; }
 		public string GameName { get; set; }
 		public double Price { get; set; }

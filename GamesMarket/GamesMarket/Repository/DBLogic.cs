@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using Dapper;
+using GamesMarket.BusinessLogic;
 
 namespace GamesMarket.Repository
 {
@@ -30,23 +31,23 @@ namespace GamesMarket.Repository
 
 		#region Insert
 
-		public bool CreateOrder(List<Basket> baskets)
+		public static bool CreateOrder(IList<Basket> baskets)
 		{
 			if(baskets.Count == 0)
 			{
 				return false;
 			}
 
-			string idUser = baskets[0].UserId;
+			string idUser = baskets[0].IdUser;
 			double totalPrice = baskets.Sum(item => item.Price);
 
 			string sql = "select * from Wallet where IDUser = @id and Balance >= @balance";
 
 			using (IDbConnection db = new SqlConnection(connectionString))
 			{
-				IEnumerable<Basket> models = db.Query<Basket>(sql, param: new { id = idUser, balance = totalPrice});
+				IEnumerable<Wallet> models = db.Query<Wallet>(sql, param: new { id = idUser, balance = totalPrice});
 
-				if (models.Count(item => item.UserId == idUser) == 0)
+				if (models.Count() == 0)
 				{
 					return false;
 				}
@@ -292,6 +293,92 @@ namespace GamesMarket.Repository
         #endregion
 
         #region Select
+
+        public static IList<Models.BLModel.GameCatalog> SelectGameByUser(string IdUser)
+        {
+            var sql = "select distinct [GameCatalog].* from [Orders], [OrderGame] , [GameCatalog] " +
+                "where [Orders].[IDOrder] =[OrderGame].IDOrder and [OrderGame].GameId = GameCatalog.ID " +
+                "and [Orders].IDUser = @Iduser";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var gameCatalog = new List<Models.BLModel.GameCatalog>();
+                var typeGameList = SelectTypeGame();
+                var model = db.Query<Models.DBModel.GameCatalog>(sql, param: new { IdUser }).ToList();
+                int i = 0;
+                foreach (var mod in model)
+                {
+                    gameCatalog.Add(new Models.BLModel.GameCatalog
+                    {
+                        Id = mod.Id,
+                        DescribeGame = mod.DescribeGame,
+                        Name = mod.Name,
+                        Price = mod.Price,
+                        TypeGame = mod.TypeGame,
+                        NameJanr = typeGameList.Where(w => w.Id == mod.TypeGame).Select(s => s.NameJanr).FirstOrDefault(),
+                        Photo = Picture.BytesToPicture(mod.Photo, i)
+                    });
+                    i++;
+                }
+                return gameCatalog;
+            }
+        }
+
+        public static IList<Models.BLModel.GameCatalog> SelectGameFind(string name)
+        {
+            var query = "Select * from GameCatalog Where [Name] like '%" + name + "%'";
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var gameCatalog = new List<Models.BLModel.GameCatalog>();
+                var typeGameList = SelectTypeGame();
+                var model = db.Query<Models.DBModel.GameCatalog>(query, param: new { name }).ToList();
+                int i = 0;
+                foreach (var mod in model)
+                {
+                    gameCatalog.Add(new Models.BLModel.GameCatalog
+                    {
+                        Id = mod.Id,
+                        DescribeGame = mod.DescribeGame,
+                        Name = mod.Name,
+                        Price = mod.Price,
+                        TypeGame = mod.TypeGame,
+                        NameJanr = typeGameList.Where(w => w.Id == mod.TypeGame).Select(s => s.NameJanr).FirstOrDefault(),
+                        Photo = Picture.BytesToPicture(mod.Photo, i)
+                    });
+                    i++;
+                }
+                return gameCatalog;
+            }
+        }
+
+        public static IList<Models.BLModel.GameCatalog> SelectGamePriceJanr(double from = 0, double to = 1000000, int janr = 0)
+        {
+            var query = "SELECT * FROM GameCatalog WHERE PRICE BETWEEN @from and @to";
+            if (janr != 0)
+                query += " and TypeGame=" + janr;
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var gameCatalog = new List<Models.BLModel.GameCatalog>();
+                var typeGameList = SelectTypeGame();
+                var model = db.Query<Models.DBModel.GameCatalog>(query, param: new { from, to }).ToList();
+                int i = 0;
+                foreach (var mod in model)
+                {
+                    gameCatalog.Add(new Models.BLModel.GameCatalog
+                    {
+                        Id = mod.Id,
+                        DescribeGame = mod.DescribeGame,
+                        Name = mod.Name,
+                        Price = mod.Price,
+                        TypeGame = mod.TypeGame,
+                        NameJanr = typeGameList.Where(w => w.Id == mod.TypeGame).Select(s => s.NameJanr).FirstOrDefault(),
+                        Photo = Picture.BytesToPicture(mod.Photo, i)
+                    });
+                    i++;
+                }
+                return gameCatalog;
+            }
+        }
+
         public IList<Models.BLModel.Ram> SelectRam(int id = default(int)) 
         {
             var query = "SELECT * FROM Ram WHERE 1=1";
@@ -342,12 +429,12 @@ namespace GamesMarket.Repository
             }
         }
 
-		public static IList<Models.BLModel.Basket> SelectBasket(string userId)
+		public static IList<Basket> SelectBasket(string userId)
 		{
 			var sql = "select * from Basket where IDUser = @userId";
 			using (IDbConnection db = new SqlConnection(connectionString))
 			{
-				var result = db.Query<Models.BLModel.Basket>(sql, param: new { userId}).ToList();
+				var result = db.Query<Basket>(sql, param: new { userId}).ToList();
 				foreach(var item in result)
 				{
 					sql = "select Name from GameCatalog where ID = @gameId";
@@ -455,7 +542,7 @@ namespace GamesMarket.Repository
                 var gameCatalog = new List<Models.BLModel.GameCatalog>();
                 var typeGameList = SelectTypeGame();
                 var model = db.Query<GameCatalog>(query).ToList();
-
+                int i = 0;
                 foreach (var mod in model)
                 {
                     gameCatalog.Add(new Models.BLModel.GameCatalog
@@ -465,8 +552,10 @@ namespace GamesMarket.Repository
                         Name = mod.Name,
                         Price = mod.Price,
                         TypeGame = mod.TypeGame,
-                        NameJanr = typeGameList.Where(w=>w.Id == mod.TypeGame).Select(s=>s.NameJanr).FirstOrDefault()
+                        NameJanr = typeGameList.Where(w => w.Id == mod.TypeGame).Select(s => s.NameJanr).FirstOrDefault(),
+                        Photo = Picture.BytesToPicture(mod.Photo,i)
                     });
+                    i++;
                 }
                 return gameCatalog;
             }
@@ -511,12 +600,12 @@ namespace GamesMarket.Repository
             }
         }
 
-        public IList<Models.BLModel.Wallet> SelectWallet(string idUser = null) 
+        public  IList<Models.BLModel.Wallet> SelectWallet(string idUser = null) 
         {
             var query = "SELECT * FROM Wallet WHERE 1=1";
             if (!string.IsNullOrEmpty(idUser))
             {
-                query += string.Format(" AND IDUSER = '{0}'", idUser);
+                query += string.Format(" AND IDUser = '{0}'", idUser);
             }
             using (IDbConnection db = new SqlConnection(connectionString))
             {
@@ -528,7 +617,7 @@ namespace GamesMarket.Repository
                 {
                     wallet.Add(new Models.BLModel.Wallet
                     {
-                        Id = mod.Id,
+                        IdUser = mod.IdUser,
                         Balance = mod.Balance,
                         Bank = mod.Bank
                     });
@@ -537,7 +626,7 @@ namespace GamesMarket.Repository
             }
         }
 
-        public IList<Models.BLModel.TypeGame> SelectTypeGame()
+        public static IList<Models.BLModel.TypeGame> SelectTypeGame()
         {
             string sqlQuery = "SELECT ID, NAMEJANR  FROM TYPEGAME";
 
@@ -559,18 +648,25 @@ namespace GamesMarket.Repository
                 return typeGame;
             }
         }
-		#endregion
+        #endregion
 
-		#region Delete
+        #region Delete
 
+        public static void ClearBasket(string userId)
+        {
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var sql = "delete from Basket where IdUser = @userId";
+                db.Execute(sql, new { userId });
+            }
+        }
 
-		public static void DeleteGameFromoBasket(string userId,int gameId)
+        public static void DeleteGameFromoBasket(string userId,int gameId, int id)
 		{
 			using (IDbConnection db = new SqlConnection(connectionString))
 			{
-				var sql = "delete from Basket where UserId = @userId and GameId = @gameId" +
-					"values (@basketModel)";
-				db.Execute(sql, new { userId, gameId });
+				var sql = "delete from Basket where IdUser = @userId and GameId = @gameId and Id = @id";
+				db.Execute(sql, new { userId, gameId, id });
 			}
 		}
 
@@ -768,7 +864,7 @@ namespace GamesMarket.Repository
 			using (IDbConnection db = new SqlConnection(connectionString))
 			{
 				var sql = "update Wallet set Balance = Balance + @summ" +
-					"where IDUser=@id";
+					" where IDUser=@id";
 				db.Execute(sql, param: new { id, summ });
 			}
 		}
@@ -778,22 +874,29 @@ namespace GamesMarket.Repository
 			using (IDbConnection db = new SqlConnection(connectionString))
 			{
 				var sql = "update Wallet set Balance = Balance - @summ" +
-					"where IDUser=@id";
+					" where IDUser=@id";
 				db.Execute(sql, param: new { id, summ });
 			}
 		}
 
-		public static void AddGameToBasket(string id, double summ)
+		public static void AddGameToBasket(string id, int gameId, double price)
 		{
 			using (IDbConnection db = new SqlConnection(connectionString))
 			{
-				var sql = "update Basket set Balance = Balance - @summ" +
-					"where IDUser=@id";
-				db.Execute(sql, param: new { id, summ });
+				var sql = "insert into Basket(IDUser, GameId, Price) values(@id, @gameId, @price) ";
+				db.Execute(sql, param: new { id, gameId, price });
 			}
 		}
-		#endregion
 
-		#endregion
-	}
+        public static double returnSum(string id)
+        {
+
+            var cart = SelectBasket(id);
+            
+            return cart.Sum(item => item.Price);
+        }
+        #endregion
+
+        #endregion
+    }
 }

@@ -12,5 +12,8 @@ namespace GamesMarket.Models.DBModel
         public int TypeGame { get; set; }
         public decimal Price { get; set; }
         public string DescribeGame { get; set; }
+        public string Url { get; set; }
+        public string Key { get; set; }
+        public byte[] Photo { get; set; }
     }
 }

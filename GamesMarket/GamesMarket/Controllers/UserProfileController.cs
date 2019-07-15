@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GamesMarket.Models.BLModel;
 
 namespace GamesMarket.Controllers
 {
@@ -21,7 +23,39 @@ namespace GamesMarket.Controllers
 
         public ActionResult Wallets()
         {
-            return View();
+            var id = User.Identity.GetUserId();
+
+            ViewBag.sum = Repository.DBLogic.returnSum(id);
+            var bal = BusinessLogic.BusinessLogic.SelectWallet(id);
+            Wallet wall = null;
+            foreach (var item in bal)
+            {
+                ViewBag.balanc = item.Balance;
+                wall = item;
+            }
+
+            return View(wall);
+        }
+
+        [HttpPost]
+        public ActionResult Wallets(Wallet model)
+        {
+            var id = User.Identity.GetUserId();
+
+            ViewBag.sum = Repository.DBLogic.returnSum(id);
+
+
+            Repository.DBLogic.AddMoneyOnWallet(id, Convert.ToDouble(model.Balance));
+
+            var bal = BusinessLogic.BusinessLogic.SelectWallet(id);
+            Wallet wall = null;
+            foreach (var item in bal)
+            {
+                ViewBag.balanc = item.Balance;
+                wall = item;
+            }
+
+            return View(wall);
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿
+﻿@model IEnumerable<GamesMarket.Models.DBModel.Basket>
 @{
     ViewBag.Title = "Index";
+    int i = 0;
+    double sum = 0;
 }
 
 <div class="container container-cart">
@@ -12,40 +14,83 @@
         <p><a href="~/Home/Index">Back to Home</a></p>
         <div class="clearfix"></div>
     </div>
-    <h3 class="page-header">
-    </h3>
+    <h3 class="page-header"></h3>
+    <p>@Html.Raw(TempData["msg"])</p>
     <div class="forum">
         <table id="customers">
             <tbody>
                 <tr>
+                    <th>№</th>
                     <th>Product Name</th>
-                    <th>Product Image</th>
-                    <th>Quantity</th>
                     <th>Price</th>
+                    <th></th>
                 </tr>
                 <tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                </tr>
-                <tr>
-                    <td colspan="3"> No product in cart</td>
-                </tr>
+                    @foreach (var item in Model)
+                    {
+                        if (Model.Count() == 0)
+                        {
+                        <tr>
+                            <td colspan="3"> No product in cart</td>
+                        </tr>
+                        break;
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>@(i += 1)</td>
+                            <td>@item.GameName</td>
+                            <td>@item.Price $</td>
+                            <td style="width: 7%;">
+                                @using (Html.BeginForm("Index", "Cart", FormMethod.Post))
+                                {
+                                    @Html.Hidden("idGames", item.GameId)
+                                    @Html.Hidden("id", item.Id)
+                                    @Html.Hidden("allDelete", false)
+                                    <button type="submit" style="width:auto" class="btn-action btn-del">
+                                        Delete
+                                    </button>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+                    <tr style="font-weight: 700;">
+                        <td></td>
+                        <td>Total Sar</td>
+                        <td>@ViewBag.sum $</td>
+                        <td style="width: 7%;">
+                            @using (Html.BeginForm("Index", "Cart", FormMethod.Post))
+                            {
+                                @Html.Hidden("idGames", 0)
+                                @Html.Hidden("id", 0)
+                                @Html.Hidden("allDelete", true)
+                            <button type="submit" style="width:auto" class="btn-action btn-del">
+                                Clean
+                            </button>
+                            }
+                        </td>
+                    </tr>
+                    </tr>
 
 
 
-            </tbody>
+                </tbody>
         </table>
 
     </div>
     <div class="text-right" style="margin-top:10px">
 
 
-        <a class="btn btn-primary" href="#" role="button"><i class="fa fa-arrow-circle-left"></i>Continue Shopping</a>
-        <a class="btn " href="#" style="background:#e2542a; color: #fff!important;" role="button">Checkout</a>
+
+        @using (Html.BeginForm("Index", "Order", FormMethod.Post))
+        {
+            <a style="margin-right: 15px" class="btn btn-primary" href="~/Home/Games" role="button"><i class="fa fa-arrow-circle-left"></i>Continue Shopping</a>
+            <button type="submit" style="background:#4fbfa8; color: #fff!important;" class="btn">
+                Checkout
+            </button>
+        }
     </div>
 </div>
 

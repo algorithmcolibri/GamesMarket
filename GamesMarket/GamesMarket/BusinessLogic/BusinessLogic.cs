@@ -148,7 +148,9 @@ namespace GamesMarket.BusinessLogic
                 Name = model.Name,
                 Price = model.Price,
                 DescribeGame = model.DescribeGame,
-                TypeGame = model.TypeGame
+                TypeGame = model.TypeGame,
+                Url = model.Url,
+                Key = model.Key
             };
             DBLogic dBLogic = new DBLogic(connectionString);
 
@@ -272,9 +274,9 @@ namespace GamesMarket.BusinessLogic
 
         public static IList<Models.BLModel.TypeGame> SelectTypeGame()
         {
-            var model = new DBLogic(connectionString);
+            //var model = new DBLogic(connectionString);
 
-            return model.SelectTypeGame();
+            return DBLogic.SelectTypeGame();
         }
 
         #endregion
@@ -336,30 +338,30 @@ namespace GamesMarket.BusinessLogic
         #endregion
 
         #region Update
-        public static bool UpdateTypeGame(Models.BLModel.TypeGame model, out string message)
-        {
-            message = null;
-            if (model.Id != 0)
-            {
-                message = "Choose record";
-                return false;
-            }
-            Models.DBModel.TypeGame typeGame = new Models.DBModel.TypeGame
-            {
-                NameJanr = model.NameJanr,
-                Id = model.Id
-            };
-            DBLogic dBLogic = new DBLogic(connectionString);
+        //public static bool UpdateTypeGame(Models.BLModel.TypeGame model, out string message)
+        //{
+        //    message = null;
+        //    if (model.Id != 0)
+        //    {
+        //        message = "Choose record";
+        //        return false;
+        //    }
+        //    Models.DBModel.TypeGame typeGame = new Models.DBModel.TypeGame
+        //    {
+        //        NameJanr = model.NameJanr,
+        //        Id = model.Id
+        //    };
+        //    DBLogic dBLogic = new DBLogic(connectionString);
 
-            var result = dBLogic.UpdateTypeGame(typeGame);
-            if (!result)
-            {
-                message = "Update failed";
-                return false;
-            }
-            return true;
+        //    var result = dBLogic.UpdateTypeGame(typeGame);
+        //    if (!result)
+        //    {
+        //        message = "Update failed";
+        //        return false;
+        //    }
+        //    return true;
 
-        }
+        //}
         #endregion
 
         #endregion

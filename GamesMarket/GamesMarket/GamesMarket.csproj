@@ -176,12 +176,12 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BLModel\Basket.cs" />
     <Compile Include="Models\BLModel\CompConfig.cs" />
     <Compile Include="Models\BLModel\ConfigCatalog.cs" />
     <Compile Include="Models\BLModel\Cpu.cs" />
@@ -222,6 +222,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\02.jpg" />
+    <Content Include="img\16.png" />
     <Content Include="img\cart-black.png" />
     <Content Include="img\cart.png" />
     <Content Include="img\clipart-black.png" />
@@ -241,6 +242,9 @@
     <Content Include="img\testImg\11.jpg" />
     <Content Include="img\testImg\13.jpg" />
     <Content Include="img\testImg\14.jpg" />
+    <Content Include="img\testImg\15.png" />
+    <Content Include="img\testImg\16.png" />
+    <Content Include="img\testImg\17.png" />
     <Content Include="img\testImg\2.jpg" />
     <Content Include="img\testImg\3.png" />
     <Content Include="img\testImg\4.png" />
@@ -331,7 +335,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Games\" />
     <Folder Include="Views\Game\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
