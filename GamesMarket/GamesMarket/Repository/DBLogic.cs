@@ -339,7 +339,9 @@ namespace GamesMarket.Repository
                         Id = mod.Id,
                         DescribeGame = mod.DescribeGame,
                         Name = mod.Name,
-                        Price = mod.Price,
+						Key = mod.Key,
+						Url = mod.Url,
+						Price = mod.Price,
                         TypeGame = mod.TypeGame,
                         NameJanr = typeGameList.Where(w => w.Id == mod.TypeGame).Select(s => s.NameJanr).FirstOrDefault(),
                         Photo = Picture.BytesToPicture(mod.Photo, i)
@@ -368,6 +370,8 @@ namespace GamesMarket.Repository
 						Id = mod.Id,
 						DescribeGame = mod.DescribeGame,
 						Name = mod.Name,
+						Key = mod.Key,
+						Url = mod.Url,
 						Price = mod.Price,
 						TypeGame = mod.TypeGame,
 						NameJanr = typeGameList.Where(w => w.Id == mod.TypeGame).Select(s => s.NameJanr).FirstOrDefault(),
@@ -396,7 +400,9 @@ namespace GamesMarket.Repository
                         DescribeGame = mod.DescribeGame,
                         Name = mod.Name,
                         Price = mod.Price,
-                        TypeGame = mod.TypeGame,
+						Key = mod.Key,
+						Url = mod.Url,
+						TypeGame = mod.TypeGame,
                         NameJanr = typeGameList.Where(w => w.Id == mod.TypeGame).Select(s => s.NameJanr).FirstOrDefault(),
                         Photo = Picture.BytesToPicture(mod.Photo, i)
                     });
@@ -426,6 +432,8 @@ namespace GamesMarket.Repository
 						Name = mod.Name,
 						Price = mod.Price,
 						TypeGame = mod.TypeGame,
+						Key = mod.Key,
+						Url = mod.Url,
 						NameJanr = typeGameList.Where(w => w.Id == mod.TypeGame).Select(s => s.NameJanr).FirstOrDefault(),
 						Photo = Picture.BytesToPicture(mod.Photo, i)
 					});
@@ -453,7 +461,9 @@ namespace GamesMarket.Repository
                         Id = mod.Id,
                         DescribeGame = mod.DescribeGame,
                         Name = mod.Name,
-                        Price = mod.Price,
+						Key = mod.Key,
+						Url = mod.Url,
+						Price = mod.Price,
                         TypeGame = mod.TypeGame,
                         NameJanr = typeGameList.Where(w => w.Id == mod.TypeGame).Select(s => s.NameJanr).FirstOrDefault(),
                         Photo = Picture.BytesToPicture(mod.Photo, i)
@@ -636,7 +646,9 @@ namespace GamesMarket.Repository
                         DescribeGame = mod.DescribeGame,
                         Name = mod.Name,
                         Price = mod.Price,
-                        TypeGame = mod.TypeGame,
+						Key = mod.Key,
+						Url = mod.Url,
+						TypeGame = mod.TypeGame,
                         NameJanr = typeGameList.Where(w => w.Id == mod.TypeGame).Select(s => s.NameJanr).FirstOrDefault(),
                         Photo = Picture.BytesToPicture(mod.Photo,i)
                     });
