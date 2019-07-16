@@ -1235,6 +1235,9 @@ ul.tags_links li a:hover{
 /*-- Media Queries Starts Here --*/
 
 @media(max-width:1024px){
+    video {
+        width: 400px;
+    }
 	.logo a img {
 		width: 65%;
 	}
@@ -1281,6 +1284,9 @@ ul.tags_links li a:hover{
 	}
 }
 @media(max-width:860px) {
+    video {
+        width: 350px;
+    }
     span.menu {
         width: 32px;
         height: 32px;
@@ -1431,6 +1437,9 @@ ul.tags_links li a:hover{
     }
 }
 @media(max-width:640px){
+    video {
+        width: 300px;
+    }
     .about-top img {
 		width: 40%;
 	}
@@ -1453,6 +1462,9 @@ ul.tags_links li a:hover{
 	 }
 }
 @media(max-width:480px){
+    video {
+        width: 200px;
+    }
 	.logo a img {
 		width: 37%;
 	}
@@ -1587,6 +1599,9 @@ ul.tags_links li a:hover{
 
 }
 @media(max-width:320px){
+    video {
+        width: 200px;
+    }
 	.logo a img {
 		width: 44%;
 	}
