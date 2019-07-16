@@ -8,6 +8,7 @@ using GamesMarket.Models.BLModel;
 
 namespace GamesMarket.Controllers
 {
+    [Authorize]
     public class UserProfileController : Controller
     {
         // GET: UserProfile

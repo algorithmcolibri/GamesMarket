@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace GamesMarket.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         // GET: Order
