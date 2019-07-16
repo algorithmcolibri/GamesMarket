@@ -60,19 +60,31 @@ namespace GamesMarket.Controllers
 
         public ActionResult Library(int ID = 0, string SearchGame = null)
         {
+            var id = User.Identity.GetUserId();
+
             ViewBag.TypeGame = BusinessLogic.BusinessLogic.SelectTypeGame();
 
-            IList<Models.BLModel.GameCatalog> gc;
+            IList<Models.BLModel.GameCatalog> ug;
             if (!string.IsNullOrEmpty(SearchGame))
             {
-                gc = Repository.DBLogic.SelectGameFind(SearchGame);
+                ug = Repository.DBLogic.SelectGameFindByUser(SearchGame, id);
             }
             else
             {
-                gc = Repository.DBLogic.SelectGamePriceJanr(ID);
+                if (ID != 0)
+                {
+                    ug = Repository.DBLogic.SelectGameJanrByUser(ID, id);
+                }
+                else
+                {
+                    ug = Repository.DBLogic.SelectGameByUser(id);
+                }
+            }
+            if (ug.Count == 0)
+            {
+                ViewBag.mes = "Nothing was found";
             }
 
-            var id = User.Identity.GetUserId();
 
             ViewBag.sum = Repository.DBLogic.returnSum(id);
             var bal = BusinessLogic.BusinessLogic.SelectWallet(id);
@@ -81,9 +93,9 @@ namespace GamesMarket.Controllers
                 ViewBag.balanc = item.Balance;
             }
 
-            ViewBag.UGame = Repository.DBLogic.SelectGameByUser(id);
+            //ViewBag.UGame = Repository.DBLogic.SelectGameByUser(id);
 
-            return View();
+            return View(ug);
         }
     }
 }

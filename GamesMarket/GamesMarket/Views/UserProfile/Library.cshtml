@@ -1,6 +1,7 @@
-﻿@*@model IEnumerable<GamesMarket.Models.BLModel.GameCatalog>*@
+﻿@model IEnumerable<GamesMarket.Models.BLModel.GameCatalog>
 @{
     ViewBag.Title = "library";
+    int i = 0;
 }
 
 <div class="games">
@@ -36,38 +37,42 @@
             }
         </div>
         <div class="main main-lib">
+            <p class="mes" style="font-size: 25px;
+    text-transform: uppercase;">@ViewBag.mes</p>
+        @foreach (var item in Model)
+        {
             <li class="li-game">
                 <div class="list-todo-item dark">
-                    <a class="list-toggle-container a-black" data-toggle="collapse" onclick=" " href="#task-1" aria-expanded="false">
+                    <a class="list-toggle-container a-black" data-toggle="collapse" onclick=" " href="#task-@i" aria-expanded="false">
                         <div class="list-toggle done uppercase">
                             <div class="list-toggle-title bold" style="height: 89px;">
                                 <div class="left-div">
-                                    <img style="width: 184px;" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/730/d0595ff02f5c79fd19b06f4d6165c3fda2372820.jpg" />
+                                    <img style="width: 184px;" src="@item.Photo" @*src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/730/d0595ff02f5c79fd19b06f4d6165c3fda2372820.jpg"*@ />
 
                                 </div>
 
                                 <div class="left-div">
-                                    <h4>Counter-Strike: Global Offensive</h4>
+                                    <h4>@item.Name</h4>
                                     <p class="p-text">
-                                        Type game: Shoter
+                                        Type game: @item.NameJanr
                                     </p>
                                 </div>
                                 <div class="left-div">
                                 </div>
                                 <div class="right-div">
-                                    <button type="submit" class="btn btn-download">
+                                    <button type="button" onclick="window.location='@item.Url'" class="btn btn-download">
                                         Download
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </a>
-                    <div class="task-list panel-collapse collapse" id="task-1" aria-expanded="false" style="width: 100%;">
+                    <div class="task-list panel-collapse collapse" id="task-@i" aria-expanded="false" style="width: 100%;">
                         <ul>
                             <li class="task-list-item done done-style" style="display: inline-block;">
                                 <div class="task-content">
                                     <p class="p-text">
-                                        AAAA-AAAA-AAAA-AAAA-AAAA
+                                        Key: @item.Key
                                     </p>
                                 </div>
                             </li>
@@ -75,46 +80,47 @@
                     </div>
                 </div>
             </li>
+            @Html.Hidden("i", (i += 1))
+        }
+        @*<li class="li-game">
+        <div class="left-div">
+            <img style="width: 184px;" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/730/d0595ff02f5c79fd19b06f4d6165c3fda2372820.jpg" />
 
-            <li class="li-game">
-                <div class="left-div">
-                    <img style="width: 184px;" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/730/d0595ff02f5c79fd19b06f4d6165c3fda2372820.jpg" />
+        </div>
 
-                </div>
+        <div class="left-div">
+            <h4>Counter-Strike: Global Offensive</h4>
+            <p class="p-text">
+                Type game: Shoter
+            </p>
+        </div>
 
-                <div class="left-div">
-                    <h4>Counter-Strike: Global Offensive</h4>
-                    <p class="p-text">
-                        Type game: Shoter
-                    </p>
-                </div>
+        <div class="right-div">
+            <button type="submit" class="btn btn-download">
+                Download
+            </button>
+        </div>
+    </li>
 
-                <div class="right-div">
-                    <button type="submit" class="btn btn-download">
-                        Download
-                    </button>
-                </div>
-            </li>
+    <li class="li-game">
+        <div class="left-div">
+            <img style="width: 184px;" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/730/d0595ff02f5c79fd19b06f4d6165c3fda2372820.jpg" />
 
-            <li class="li-game">
-                <div class="left-div">
-                    <img style="width: 184px;" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/730/d0595ff02f5c79fd19b06f4d6165c3fda2372820.jpg" />
+        </div>
 
-                </div>
+        <div class="left-div">
+            <h4>Counter-Strike: Global Offensive</h4>
+            <p class="p-text">
+                Type game: Shoter
+            </p>
+        </div>
 
-                <div class="left-div">
-                    <h4>Counter-Strike: Global Offensive</h4>
-                    <p class="p-text">
-                        Type game: Shoter
-                    </p>
-                </div>
-
-                <div class="right-div">
-                    <button type="submit" class="btn btn-download">
-                        Download
-                    </button>
-                </div>
-            </li>
+        <div class="right-div">
+            <button type="submit" class="btn btn-download">
+                Download
+            </button>
+        </div>
+    </li>*@
         </div>
         <div class="side-bar">
             <h4>Type games</h4>

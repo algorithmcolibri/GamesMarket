@@ -1868,17 +1868,19 @@ ul.tags_links li a:hover{
 }
 .li-game img {
     width: 184px;
+    height: 90px;
 }
 .left-div {
     float: left;
     padding: 10px;
     color: #ffffff;
 }
-.left-div h4{
-    float:left;
-    padding-top:10px;
-    margin-left: 20px;
-}
+    .left-div h4 {
+        float: left;
+        padding-top: 10px;
+        margin-left: 20px;
+        width: 100%;
+    }
 .p-text {
     margin-left: 20px;
 }
