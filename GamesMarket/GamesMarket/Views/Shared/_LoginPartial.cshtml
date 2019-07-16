@@ -5,7 +5,7 @@
     {
         @Html.AntiForgeryToken()
 
-        <li>@Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+        <li>@Html.ActionLink(User.Identity.GetUserName(), "Library", "UserProfile", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
         <li>
             <a class="tx-left" href="~/UserProfile/Wallets">@ViewBag.balanc<img id="dollar" class="nav-icon" src="~/img/dollar-white.png" style="width:20px"></a>
         </li>

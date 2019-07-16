@@ -27,7 +27,7 @@
                 <div class="portfolio app mix_all" data-cat="app" style="display: inline-block; opacity: 1;">
                     <div class="portfolio-wrapper">
                         <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                            <img src="~/img/testImg/16.png" style="width: 670px; height: 270px;" />
+                            <img src="~/img/testImg/16.png" style="width: 670px" />
                             @if (Request.IsAuthenticated)
                             {
                             <div class="b-wrapper">
@@ -50,8 +50,9 @@
                             else
                             {
                                 <div class="b-wrapper">
-                                    <h2 class="b-animate b-from-left    b-delay03 buy-h2">100$</h2>
-                                    <p class="b-animate b-from-left buy-p">Game</p>
+
+                                    <h2 class="b-animate b-from-left    b-delay03 buy-h2">70$</h2>
+                                    <p class="b-animate b-from-left buy-p">Living as a man outside the shadow of the gods, kratos must adapt to the unfamiliar norse lands, unexpected threats, and a second chance at being a father.</p>
                                     <button type="button" onclick="window.location.href='@Url.Action("Login", "Account")';" class="b-animate b-from-left btn-order btn-home">Order Now</button>
                                 </div>
                                 
@@ -63,36 +64,132 @@
                 <div class="portfolio icon mix_all" data-cat="icon" style="display: inline-block; opacity: 1;">
                     <div class="portfolio-wrapper">
                         <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                            <img src="~/img/testImg/2.jpg" style="width: 470px; height: 270px;" /><div class="b-wrapper">
-                                <h2 class="b-animate b-from-left    b-delay03 "> </h2>
+                            <img src="~/img/testImg/19.png" style="width: 470px" />
+                            @if (Request.IsAuthenticated)
+                            {
+                            <div class="b-wrapper">
+                                <h2 class="b-animate b-from-left    b-delay03 buy-h2">85$</h2>
+                                <p class="b-animate b-from-left buy-p">Live the Horizon Life when you play Forza Horizon 4. Experience a shared world with dynamic seasons. Explore beautiful scenery, collect over 450 cars.</p>
+                                @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                                {
+                                    @Html.Hidden("Id", 7)
+                                    @Html.Hidden("Name", "Forza Horizon 4")
+                                    @Html.Hidden("Price", 85)
+                                    <div class="form-actions" style="padding-top: 0">
+                                        <button type="submit" class="b-animate b-from-left btn-order btn-home">Order Now</button>
+
+                                    </div>
+                                }
                             </div>
+                            }
+                            else
+                            {
+                                <div class="b-wrapper">
+                                    <h2 class="b-animate b-from-left    b-delay03 buy-h2">85$</h2>
+                                    <p class="b-animate b-from-left buy-p">Living as a man outside the shadow of the gods, kratos must adapt to the unfamiliar norse lands, unexpected threats, and a second chance at being a father.</p>
+                                    <button type="button" onclick="window.location.href='@Url.Action("Login", "Account")';" class="b-animate b-from-left btn-order btn-home">Order Now</button>
+                                </div>
+
+                            }
                         </a>
                     </div>
                 </div>
                 <div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
                     <div class="portfolio-wrapper">
                         <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                            <img src="~/img/testImg/11.jpg" style="width: 300px; height: 270px;" /><div class="b-wrapper">
-                                <h2 class="b-animate b-from-left    b-delay03 "> </h2>
-                            </div>
+                            <img src="~/img/testImg/11.jpg" style="width: 300px" />
+                            @if (Request.IsAuthenticated)
+                            {
+                                <div class="b-wrapper">
+                                    <h2 class="b-animate b-from-left    b-delay03 buy-h2">65$</h2>
+                                    <p class="b-animate b-from-left buy-p">Carve your own clever path to vengeance in an all-new adventure from developer FromSoftware, creators of Bloodborne and the Dark Souls series.</p>
+                                    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                                    {
+                                        @Html.Hidden("Id", 8)
+                                        @Html.Hidden("Name", "Sekiro shadows die twice")
+                                        @Html.Hidden("Price", 65)
+                                        <div class="form-actions" style="padding-top: 0">
+                                            <button type="submit" class="b-animate b-from-left btn-order btn-home">Order Now</button>
+
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="b-wrapper">
+                                    <h2 class="b-animate b-from-left    b-delay03 buy-h2">65$</h2>
+                                    <p class="b-animate b-from-left buy-p">Carve your own clever path to vengeance in an all-new adventure from developer FromSoftware, creators of Bloodborne and the Dark Souls series.</p>
+                                    <button type="button" onclick="window.location.href='@Url.Action("Login", "Account")';" class="b-animate b-from-left btn-order btn-home">Order Now</button>
+                                </div>
+
+                            }
                         </a>
                     </div>
                 </div>
                 <div class="portfolio logos mix_all" data-cat="logo" style="display: inline-block; opacity: 1;">
                     <div class="portfolio-wrapper">
                         <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                            <img src="~/img/testImg/17.png" style="width: 500px; height: 270px;" /><div class="b-wrapper">
-                                <h2 class="b-animate b-from-left    b-delay03 "> </h2>
-                            </div>
+                            <img src="~/img/testImg/17.png" style="width: 500px" />
+                            @if (Request.IsAuthenticated)
+                            {
+                                <div class="b-wrapper">
+                                    <h2 class="b-animate b-from-left    b-delay03 buy-h2">8$</h2>
+                                    <p class="b-animate b-from-left buy-p">Let the motor roar, let your car tear the streets to shreds - this is the whole essence of our legendary series.</p>
+                                    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                                    {
+                                        @Html.Hidden("Id", 6)
+                                        @Html.Hidden("Name", "NFS Most Wanted")
+                                        @Html.Hidden("Price", 8)
+                                        <div class="form-actions" style="padding-top: 0">
+                                            <button type="submit" class="b-animate b-from-left btn-order btn-home">Order Now</button>
+
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="b-wrapper">
+                                    <h2 class="b-animate b-from-left    b-delay03 buy-h2">8$</h2>
+                                    <p class="b-animate b-from-left buy-p">Let the motor roar, let your car tear the streets to shreds - this is the whole essence of our legendary series.</p>
+                                    <button type="button" onclick="window.location.href='@Url.Action("Login", "Account")';" class="b-animate b-from-left btn-order btn-home">Order Now</button>
+                                </div>
+
+                            }
                         </a>
                     </div>
                 </div>
                 <div class="portfolio card mix_all" data-cat="card" style="display: inline-block; opacity: 1;">
                     <div class="portfolio-wrapper">
                         <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                            <img src="~/img/testImg/9.jpg" style="width: 300px; height: 270px;" /><div class="b-wrapper">
-                                <h2 class="b-animate b-from-left    b-delay03 "> </h2>
-                            </div>
+                            <img src="~/img/testImg/9.jpg" style="width: 300px" />
+                            @if (Request.IsAuthenticated)
+                            {
+                                <div class="b-wrapper">
+                                    <h2 class="b-animate b-from-left    b-delay03 buy-h2">55$</h2>
+                                    <p class="b-animate b-from-left buy-p">The first game in this popular series to make its debut in the current generation, bringing stylish mayhem against fiendish foes at the hands of Devil Hunters with demon blood in their veins.</p>
+                                    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                                    {
+                                        @Html.Hidden("Id", 9)
+                                        @Html.Hidden("Name", "Devil may cry 5")
+                                        @Html.Hidden("Price", 55)
+                                        <div class="form-actions" style="padding-top: 0">
+                                            <button type="submit" class="b-animate b-from-left btn-order btn-home">Order Now</button>
+
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="b-wrapper">
+                                    <h2 class="b-animate b-from-left    b-delay03 buy-h2">55$</h2>
+                                    <p class="b-animate b-from-left buy-p">The first game in this popular series to make its debut in the current generation, bringing stylish mayhem against fiendish foes at the hands of Devil Hunters with demon blood in their veins.</p>
+                                    <button type="button" onclick="window.location.href='@Url.Action("Login", "Account")';" class="b-animate b-from-left btn-order btn-home">Order Now</button>
+                                </div>
+
+                            }
                         </a>
                     </div>
                 </div>

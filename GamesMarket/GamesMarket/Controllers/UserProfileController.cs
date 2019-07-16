@@ -57,5 +57,33 @@ namespace GamesMarket.Controllers
 
             return View(wall);
         }
+
+        public ActionResult Library(int ID = 0, string SearchGame = null)
+        {
+            ViewBag.TypeGame = BusinessLogic.BusinessLogic.SelectTypeGame();
+
+            IList<Models.BLModel.GameCatalog> gc;
+            if (!string.IsNullOrEmpty(SearchGame))
+            {
+                gc = Repository.DBLogic.SelectGameFind(SearchGame);
+            }
+            else
+            {
+                gc = Repository.DBLogic.SelectGamePriceJanr(ID);
+            }
+
+            var id = User.Identity.GetUserId();
+
+            ViewBag.sum = Repository.DBLogic.returnSum(id);
+            var bal = BusinessLogic.BusinessLogic.SelectWallet(id);
+            foreach (var item in bal)
+            {
+                ViewBag.balanc = item.Balance;
+            }
+
+            //ViewBag.UGame = Repository.DBLogic.SelectGameByUser(id);
+
+            return View();
+        }
     }
 }
