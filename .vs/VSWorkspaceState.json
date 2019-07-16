@@ -7,9 +7,9 @@
     "\\GamesMarket\\GamesMarket\\BusinessLogic",
     "\\GamesMarket\\GamesMarket\\Controllers",
     "\\GamesMarket\\GamesMarket\\Models",
-    "\\GamesMarket\\GamesMarket\\Models\\BLModel",
-    "\\GamesMarket\\GamesMarket\\Models\\DBModel",
-    "\\GamesMarket\\GamesMarket\\Repository"
+    "\\GamesMarket\\GamesMarket\\Views",
+    "\\GamesMarket\\GamesMarket\\Views\\Cart",
+    "\\GamesMarket\\GamesMarket\\Views\\Home"
   ],
   "SelectedNode": "\\GamesMarket\\GamesMarket\\Repository\\DBLogic.cs",
   "PreviewInSolutionExplorer": false
