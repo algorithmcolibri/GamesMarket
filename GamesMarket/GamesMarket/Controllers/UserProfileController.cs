@@ -81,7 +81,7 @@ namespace GamesMarket.Controllers
                 ViewBag.balanc = item.Balance;
             }
 
-            //ViewBag.UGame = Repository.DBLogic.SelectGameByUser(id);
+            ViewBag.UGame = Repository.DBLogic.SelectGameByUser(id);
 
             return View();
         }

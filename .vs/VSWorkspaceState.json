@@ -6,8 +6,11 @@
     "\\GamesMarket\\GamesMarket\\App_Start",
     "\\GamesMarket\\GamesMarket\\BusinessLogic",
     "\\GamesMarket\\GamesMarket\\Controllers",
-    "\\GamesMarket\\GamesMarket\\Models"
+    "\\GamesMarket\\GamesMarket\\Models",
+    "\\GamesMarket\\GamesMarket\\Models\\BLModel",
+    "\\GamesMarket\\GamesMarket\\Models\\DBModel",
+    "\\GamesMarket\\GamesMarket\\Repository"
   ],
-  "SelectedNode": "\\GamesMarket\\GamesMarket\\Models\\IdentityModels.cs",
+  "SelectedNode": "\\GamesMarket\\GamesMarket\\Repository\\DBLogic.cs",
   "PreviewInSolutionExplorer": false
 }

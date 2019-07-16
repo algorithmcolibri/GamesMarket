@@ -16,8 +16,9 @@ namespace GamesMarket.Controllers
             var gc = BusinessLogic.BusinessLogic.SelectGameCatalog();
 
             var id = User.Identity.GetUserId();
-
-            ViewBag.sum = Repository.DBLogic.returnSum(id);
+			ViewBag.CountSaledGames = Repository.DBLogic.SaledGames();
+			ViewBag.CountUsers = Repository.DBLogic.UserCount();
+			ViewBag.sum = Repository.DBLogic.returnSum(id);
             var bal = BusinessLogic.BusinessLogic.SelectWallet(id);
 
             foreach (var item in bal)
@@ -51,8 +52,9 @@ namespace GamesMarket.Controllers
         public ActionResult Games(int ID = 0, string SearchGame = null, int From = 0, int To = 100000)
         {
             ViewBag.TypeGame = BusinessLogic.BusinessLogic.SelectTypeGame();
-
-            IList<Models.BLModel.GameCatalog> gc;
+			ViewBag.CountSaledGames = Repository.DBLogic.SaledGames();
+			ViewBag.CountUsers = Repository.DBLogic.UserCount();
+			IList<Models.BLModel.GameCatalog> gc;
             if (!string.IsNullOrEmpty(SearchGame))
             {
                 gc = Repository.DBLogic.SelectGameFind(SearchGame);

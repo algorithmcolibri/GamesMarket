@@ -338,6 +338,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="img1\" />
     <Folder Include="Views\Games\" />
     <Folder Include="Views\Game\" />
     <Folder Include="Views\Order\" />

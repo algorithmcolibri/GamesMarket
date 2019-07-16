@@ -294,11 +294,38 @@ namespace GamesMarket.Repository
 
         #region Select
 
-        public static IList<Models.BLModel.GameCatalog> SelectGameByUser(string IdUser)
+		public static int UserCount()
+		{
+			var query = "Select count(*) from AspNetUsers";
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				return db.Query<int>(query).FirstOrDefault();
+			}
+		}
+
+		public static int SaledGames()
+		{
+			var query = "Select count(*) from [OrderGame]";
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				return db.Query<int>(query).FirstOrDefault();
+			}
+		}
+
+		public static string SelectTypeName(int id)
+		{
+			var query = "Select NameJanr from [TypeGame] where ID="+id;
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				return db.Query<string>(query).FirstOrDefault();
+			}
+		}
+
+		public static IList<Models.BLModel.GameCatalog> SelectGameByUser(string IdUser)
         {
-            var sql = "select distinct [GameCatalog].* from [Orders], [OrderGame] , [GameCatalog] " +
-                "where [Orders].[IDOrder] =[OrderGame].IDOrder and [OrderGame].GameId = GameCatalog.ID " +
-                "and [Orders].IDUser = @Iduser";
+            var sql = "select Distinct [GameCatalog].[Id], [GameCatalog].[Name],[GameCatalog].[key], [GameCatalog].[url], [GameCatalog].[TypeGame],[GameCatalog].[Price], [GameCatalog].[Photo] from [Orders], [OrderGame] , [GameCatalog] " +
+				"where [Orders].[IDOrder] =[OrderGame].IDOrder and [OrderGame].GameId = GameCatalog.ID " +
+				"and [Orders].IDUser = @Iduser";
             using (IDbConnection db = new SqlConnection(connectionString))
             {
                 var gameCatalog = new List<Models.BLModel.GameCatalog>();
@@ -323,7 +350,36 @@ namespace GamesMarket.Repository
             }
         }
 
-        public static IList<Models.BLModel.GameCatalog> SelectGameFind(string name)
+		public static IList<Models.BLModel.GameCatalog> SelectGameFindByUser(string name, string IdUser)
+		{
+			var sql = "select Distinct [GameCatalog].[Id], [GameCatalog].[Name],[GameCatalog].[key], [GameCatalog].[url], [GameCatalog].[TypeGame],[GameCatalog].[Price], [GameCatalog].[Photo] from [Orders], [OrderGame] , [GameCatalog] " +
+				"where [Orders].[IDOrder] =[OrderGame].IDOrder and [OrderGame].GameId = GameCatalog.ID " +
+				"and [Orders].IDUser = @Iduser and GameCatalog.[Name] like '%" + name + "%'";
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var gameCatalog = new List<Models.BLModel.GameCatalog>();
+				var typeGameList = SelectTypeGame();
+				var model = db.Query<Models.DBModel.GameCatalog>(sql, param: new { IdUser }).ToList();
+				int i = 0;
+				foreach (var mod in model)
+				{
+					gameCatalog.Add(new Models.BLModel.GameCatalog
+					{
+						Id = mod.Id,
+						DescribeGame = mod.DescribeGame,
+						Name = mod.Name,
+						Price = mod.Price,
+						TypeGame = mod.TypeGame,
+						NameJanr = typeGameList.Where(w => w.Id == mod.TypeGame).Select(s => s.NameJanr).FirstOrDefault(),
+						Photo = Picture.BytesToPicture(mod.Photo, i)
+					});
+					i++;
+				}
+				return gameCatalog;
+			}
+		}
+
+		public static IList<Models.BLModel.GameCatalog> SelectGameFind(string name)
         {
             var query = "Select * from GameCatalog Where [Name] like '%" + name + "%'";
             using (IDbConnection db = new SqlConnection(connectionString))
@@ -350,7 +406,36 @@ namespace GamesMarket.Repository
             }
         }
 
-        public static IList<Models.BLModel.GameCatalog> SelectGamePriceJanr(double from = 0, double to = 1000000, int janr = 0)
+		public static IList<Models.BLModel.GameCatalog> SelectGameJanrByUser(int janr, string IdUser)
+		{
+			var sql = "select Distinct [GameCatalog].[Id], [GameCatalog].[Name],[GameCatalog].[key], [GameCatalog].[url], [GameCatalog].[TypeGame],[GameCatalog].[Price], [GameCatalog].[Photo] from [Orders], [OrderGame] , [GameCatalog] " +
+				"where [Orders].[IDOrder] =[OrderGame].IDOrder and [OrderGame].GameId = GameCatalog.ID " +
+				"and [Orders].IDUser = @Iduser and GameCatalog.[TypeGame] = " + janr;
+			using (IDbConnection db = new SqlConnection(connectionString))
+			{
+				var gameCatalog = new List<Models.BLModel.GameCatalog>();
+				var typeGameList = SelectTypeGame();
+				var model = db.Query<Models.DBModel.GameCatalog>(sql, param: new { IdUser }).ToList();
+				int i = 0;
+				foreach (var mod in model)
+				{
+					gameCatalog.Add(new Models.BLModel.GameCatalog
+					{
+						Id = mod.Id,
+						DescribeGame = mod.DescribeGame,
+						Name = mod.Name,
+						Price = mod.Price,
+						TypeGame = mod.TypeGame,
+						NameJanr = typeGameList.Where(w => w.Id == mod.TypeGame).Select(s => s.NameJanr).FirstOrDefault(),
+						Photo = Picture.BytesToPicture(mod.Photo, i)
+					});
+					i++;
+				}
+				return gameCatalog;
+			}
+		}
+
+		public static IList<Models.BLModel.GameCatalog> SelectGamePriceJanr(double from = 0, double to = 1000000, int janr = 0)
         {
             var query = "SELECT * FROM GameCatalog WHERE PRICE BETWEEN @from and @to";
             if (janr != 0)
