@@ -60,7 +60,7 @@
                                 <div class="left-div">
                                 </div>
                                 <div class="right-div">
-                                    <button type="button" onclick="window.location='@item.Url'" class="btn btn-download">
+                                    <button @*type="button"*@ target="_blank" onclick="window.open('@item.Url','_blank');return false;" class="btn btn-download">
                                         Download
                                     </button>
                                 </div>
